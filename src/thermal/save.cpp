@@ -13,10 +13,25 @@
 *
 */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <Time.h>
+#include <hardware.h>
+#include <gui.h>
+#include <sd.h>
+#include <display.h>
+#include <displaydefines.h>
+#include <fonts.h>
+#include <load.h>
+#include <create.h>
+#include <livemode.h>
+#include <camera.h>
 #include <save.h>
 
-/* Variables */
+/*######################### STATIC DATA DECLARATIONS ##########################*/
 
 //160 x 120 bitmap header
 static const char bmp_header_small[66] = { 0x42, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -45,7 +60,7 @@ static const char bmp_header_large[66] = { 0x42, 0x4D, 0x36, 0x60, 0x09, 0x00, 0
 0x00, 0x00, 0x00, 0x00, 0xF8, 0x00, 0x00, 0xE0, 0x07, 0x00, 0x00,
 0x1F, 0x00, 0x00, 0x00 };
 
-/* Methods */
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Creates a filename from the current time & date */
 void createSDName(char* filename, boolean folder) {
@@ -180,7 +195,7 @@ void imgSaveStart() {
 	//Set background transparent
 	display_setBackColor(VGA_TRANSPARENT);
 	//Display to screen in big font
-	display_setFont(bigFont);
+	display_setFont((uint8_t*) bigFont);
 
 	//Capture visual image if enabled and saving
 	if (visualEnabled && (displayMode == displayMode_thermal) && (checkDiagnostic(diag_camera)))
@@ -218,7 +233,7 @@ void imgSaveStart() {
 	//Set marker to create image
 	imgSave = imgSave_create;
 	//Switch back to small font
-	display_setFont(smallFont);
+	display_setFont((uint8_t*) smallFont);
 }
 
 /* Creates the filename for the video frames */
@@ -264,12 +279,12 @@ void processVideoFrames(int framesCaptured, char* dirname) {
 	//Display title
 	display_fillScr(200, 200, 200);
 	display_setBackColor(200, 200, 200);
-	display_setFont(bigFont);
+	display_setFont((uint8_t*) bigFont);
 	display_setColor(VGA_BLUE);
 	display_print((char*)"Video conversion", CENTER, 30);
 
 	//Display info
-	display_setFont(smallFont);
+	display_setFont((uint8_t*) smallFont);
 	display_setColor(VGA_BLACK);
 	display_print((char*)"Converts all .DAT to .BMP frames", CENTER, 80);
 	display_print((char*)"Press button to abort the process", CENTER, 120);
@@ -321,7 +336,7 @@ void processVideoFrames(int framesCaptured, char* dirname) {
 
 		//Font color
 		display_setBackColor(200, 200, 200);
-		display_setFont(smallFont);
+		display_setFont((uint8_t*) smallFont);
 		display_setColor(VGA_BLACK);
 
 		//Update screen content

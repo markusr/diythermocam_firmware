@@ -13,13 +13,15 @@
 *
 */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
 #include <ov2640.h>
 #include <tjpgd.h>
 #include <camera.h>
 #include <vc0706.h>
 
-/* Variables */
+/*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 
 //JPEG Decompressor structure
 typedef struct {
@@ -27,6 +29,8 @@ typedef struct {
 	unsigned short jsize;
 	unsigned short joffset;
 } IODEV;
+
+/*######################### STATIC DATA DECLARATIONS ##########################*/
 
 //JPEG Decompressor
 static void* camera_jdwork;
@@ -39,8 +43,7 @@ static uint8_t* camera_jpegData;
 //The current camera resolution
 static byte camera_resolution;
 
-
-/* Methods */
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Capture an image on the camera */
 void camera_capture(void)

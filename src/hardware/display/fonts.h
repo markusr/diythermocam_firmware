@@ -20,6 +20,8 @@
 extern "C" {
 #endif
 
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
 extern const unsigned char tinyFont[];
 extern const unsigned char smallFont[];
 extern const unsigned char bigFont[];

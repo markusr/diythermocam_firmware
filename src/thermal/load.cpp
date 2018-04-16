@@ -13,10 +13,27 @@
 *
 */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <create.h>
+#include <thermal.h>
+#include <livemode.h>
+#include <hardware.h>
+#include <display.h>
+#include <gui.h>
+#include <loadmenu.h>
+#include <mainmenu.h>
+#include <point.h>
+#include <touchscreen.h>
+#include <buttons.h>
+#include <fonts.h>
+#include <sd.h>
 #include <load.h>
 
-/* Defines */
+/*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 
 #define lepton2_small 9621
 #define lepton2_big 10005
@@ -27,7 +44,7 @@
 #define loadMode_image 0
 #define loadMode_video 1
 
-/* Variables */
+/*######################### STATIC DATA DECLARATIONS ##########################*/
 
 //Storage for up to maxFiles images/videos
 static uint16_t* yearStorage;
@@ -59,7 +76,7 @@ static int imgCount = 0;
 //Decide if we load videos or images
 static bool loadMode;
 
-/* Methods */
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Clear all previous data */
 void clearData() {
@@ -747,7 +764,7 @@ void checkFileEnding(bool* check, char* filename) {
 }
 
 /* Find the next or previous file/folder on the SD card or the position */
-bool findFile(char* filename, bool next, bool restart, int* position = 0, char* compare = NULL) {
+bool findFile(char* filename, bool next, bool restart, int* position, char* compare) {
 	bool found = false;
 	int counter = 0;
 
@@ -1135,7 +1152,7 @@ redraw:
 	mainMenuTitle((char*)"Load Menu");
 	//Draw the buttons
 	buttons_deleteAllButtons();
-	buttons_setTextFont(bigFont);
+	buttons_setTextFont((uint8_t*) bigFont);
 	buttons_addButton(15, 47, 140, 120, (char*) "Images");
 	buttons_addButton(165, 47, 140, 120, (char*) "Videos");
 	buttons_addButton(15, 188, 140, 40, (char*) "Back");

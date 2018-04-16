@@ -20,6 +20,8 @@
 extern "C" {
 #endif
 
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
 #define SPICLOCK 30000000
 
 #define LEFT 0

@@ -13,20 +13,19 @@
 *
 */
 
-#include <Arduino.h>
-#include <display.h>
-#include <displaydefines.h>
+/*################################# INCLUDES ##################################*/
 
-struct propFont
-{
-	byte charCode;
-	int adjYOffset;
-	int width;
-	int height;
-	int xOffset;
-	int xDelta;
-	byte* dataPtr;
-};
+#include <Arduino.h>
+#include <SPI.h>
+#include <hardware.h>
+#include <globaldefines.h>
+#include <displaydefines.h>
+#include <EEPROM.h>
+#include <display.h>
+
+/*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
+
+
 
 struct current_font
 {
@@ -37,7 +36,7 @@ struct current_font
 	uint8_t numchars;
 };
 
-/* Variables */
+/*######################### STATIC DATA DECLARATIONS ##########################*/
 
 static uint8_t pcs_data, pcs_command, rotation;
 static current_font cfont;
@@ -46,7 +45,7 @@ static byte fch, fcl, bch, bcl, orient;
 static uint16_t imageX, imageY;
 static boolean display_writeToImage;
 
-/* Methods */
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 void display_waitFifoNotFull()
 {
@@ -136,7 +135,7 @@ void display_setAddr(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1)
 }
 
 /* Read 8-bit command from the screen */
-uint8_t display_readcommand8(uint8_t c, uint8_t index = 0)
+uint8_t display_readcommand8(uint8_t c, uint8_t index)
 {
 	uint16_t wTimeout = 0xffff;
 	uint8_t r = 0;

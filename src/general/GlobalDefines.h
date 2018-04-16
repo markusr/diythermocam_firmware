@@ -13,6 +13,19 @@
 *
 */
 
+#ifndef GLOBALDEFINES_H
+#define GLOBALDEFINES_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
+//Current firmware version
+#define Version 	"Firmware 2.45 from 06.04.2018"
+#define fwVersion 	245
+
 //Pins
 #define pin_button        2
 #define pin_laser         4
@@ -258,3 +271,9 @@
 #define camera_stream 0
 #define camera_save   1
 #define camera_serial 2
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* GLOBALDEFINES_H */

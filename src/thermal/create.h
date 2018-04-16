@@ -16,32 +16,26 @@
 #ifndef _CREATE_H
 #define _CREATE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*########################## PUBLIC PROCEDURES ################################*/
 
-void gaussianFilter();
 void boxFilter();
-void resizePixels(unsigned short* pixels, int w1, int h1, int w2, int h2);
-void resizeImage();
 void calcFillPixel(uint16_t x, uint16_t y);
-void fillEdges();
-void smallToBigBuffer(bool trans);
+void calculatePointPos(int16_t* xpos, int16_t* ypos, uint16_t pixelIndex);
 void clearTempPoints();
-void showTemperatures();
-void getTouchPos(uint16_t* x, uint16_t* y);
-void tempPointFunction(bool remove);
-void limitValues();
+void convertColors(bool small = false);
+void createThermalImg(bool small = false);
+void createVisCombImg();
+void fillEdges();
+void gaussianFilter();
 void getHotColdColors(byte* red, byte* green, byte* blue);
-void convertColors(bool small);
+void getTouchPos(uint16_t* x, uint16_t* y);
+void limitValues();
 void refreshMinMax();
 void refreshTempPoints();
-void calculatePointPos(int16_t* xpos, int16_t* ypos, uint16_t pixelIndex);
-void createThermalImg(bool small);
-void createVisCombImg();
-
-#ifdef __cplusplus
-}
-#endif
+void resizeImage();
+void resizePixels(unsigned short* pixels, int w1, int h1, int w2, int h2);
+void showTemperatures();
+void smallToBigBuffer(bool trans = false);
+void tempPointFunction(bool remove = false);
 
 #endif /* _CREATE_H */

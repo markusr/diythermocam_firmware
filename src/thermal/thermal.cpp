@@ -13,16 +13,29 @@
 *
 */
 
-/* Includes */
+/*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <touchscreen.h>
+#include <hardware.h>
+#include <gui.h>
+#include <lepton.h>
+#include <EEPROM.h>
 #include <calibration.h>
 #include <create.h>
-#include <load.h>
+#include <display.h>
+#include <colorschemes.h>
+#include <camera.h>
+#include <connection.h>
+#include <mainmenu.h>
 #include <save.h>
+#include <livemode.h>
+#include <videomenu.h>
+#include <globalvariables.h>
 #include <thermal.h>
 
-/* Methods*/
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Touch interrupt handler */
 void touchIRQ() {

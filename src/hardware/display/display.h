@@ -16,9 +16,20 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
+struct propFont
+{
+	byte charCode;
+	int adjYOffset;
+	int width;
+	int height;
+	int xOffset;
+	int xDelta;
+	byte* dataPtr;
+};
+
+/*########################## PUBLIC PROCEDURES ################################*/
 
 void display_clrScr();
 void display_clrXY();
@@ -37,6 +48,7 @@ void display_fillCircle(int x, int y, int radius);
 void display_fillRect(int x1, int y1, int x2, int y2);
 void display_fillRoundRect(int x1, int y1, int x2, int y2);
 void display_fillScr(word color);
+void display_fillScr(byte r, byte g, byte b);
 word display_getBackColor();
 boolean display_getCharPtr(byte c, propFont& fontChar);
 word display_getColor();
@@ -63,7 +75,9 @@ void display_rotateChar(byte c, int x, int y, int pos, int deg);
 int display_rotatePropChar(byte c, int x, int y, int offset, int deg);
 void display_setAddr(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1);
 void display_setBackColor(byte r, byte g, byte b);
+void display_setBackColor(uint32_t color);
 void display_setColor(byte r, byte g, byte b);
+void display_setColor(word color);
 void display_setFont(uint8_t* font);
 void display_setPixel(word color);
 void display_setRotation(uint8_t m);
@@ -82,8 +96,5 @@ void display_writeRect2BPP(int16_t x, int16_t y, int16_t w, int16_t h, const uin
 void display_writeRect4BPP(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* pixels, const uint16_t* palette);
 void display_writeScreen(unsigned short* pcolors, boolean small);
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* DISPLAY_H */

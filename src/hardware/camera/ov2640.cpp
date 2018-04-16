@@ -13,10 +13,13 @@
 *
 */
 
-/* Include */
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
 #include <ov2640regs.h>
 #include <ov2640.h>
+
+/*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 
 /* Sensor related definitions */
 
@@ -88,7 +91,7 @@
 #define FIFO_SIZE2 0x43
 #define FIFO_SIZE3 0x44
 
-/* Methods */
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* I2C Write 8bit address, 8bit data */
 byte ov2640_wrSensorReg8_8(int regID, int regDat) {

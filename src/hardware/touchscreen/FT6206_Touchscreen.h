@@ -19,9 +19,9 @@
 
 #define FT6206_DEFAULT_THRESSHOLD 128
 
-#include "Arduino.h"
-#include "../../Libraries/I2C/i2c_t3.h"
-#include "Point.h"
+#include <Arduino.h>
+#include <i2c_t3.h>
+#include <Point.h>
 
 class FT6206_Touchscreen {
 public:

@@ -20,6 +20,8 @@
 extern "C" {
 #endif
 
+/*########################## PUBLIC PROCEDURES ################################*/
+
 void camera_capture(void);
 void camera_changeRes(byte camRes);
 unsigned int camera_decompIn(JDEC * jd, byte* buff, unsigned int ndata);

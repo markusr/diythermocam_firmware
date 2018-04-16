@@ -13,8 +13,12 @@
 *
 */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
 #include <displaydefines.h>
+
+/*############################# PUBLIC VARIABLES ##############################*/
 
 const uint8_t init_commands[] = {
 	4, 0xEF, 0x03, 0x80, 0x02,

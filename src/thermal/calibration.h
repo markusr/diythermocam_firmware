@@ -16,22 +16,17 @@
 #ifndef _CALIBRATION_H
 #define _CALIBRATION_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*########################## PUBLIC PROCEDURES ################################*/
 
-float celciusToFahrenheit(float Tc);
-float fahrenheitToCelcius(float Tf);
-float calFunction(uint16_t rawValue);
-uint16_t tempToRaw(float temp);
 uint16_t calcAverage();
-void compensateCalib();
-void checkWarmup();
-void calibrationProcess(bool serial, bool firstStart);
+float calFunction(uint16_t rawValue);
 bool calibration();
-
-#ifdef __cplusplus
-}
-#endif
+void calibrationProcess(bool serial = false, bool firstStart = false);
+float celciusToFahrenheit(float Tc);
+void checkWarmup();
+void compensateCalib();
+float fahrenheitToCelcius(float Tf);
+int linreg(int n, const uint16_t x[], const float y[], float* m, float* b, float* r);
+uint16_t tempToRaw(float temp);
 
 #endif /* _CALIBRATION_H */

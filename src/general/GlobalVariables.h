@@ -13,150 +13,88 @@
 *
 */
 
-/* Variables */
+#ifndef GLOBALVARIABLES_H
+#define GLOBALVARIABLES_H
 
-//320x240 buffer (Teensy 3.6 only)
-unsigned short* bigBuffer;
-//160x120 buffer
-unsigned short* smallBuffer;
+/*################################# INCLUDES ##################################*/
 
-//Fonts
-extern uint8_t tinyFont[];
-extern uint8_t smallFont[];
-extern uint8_t bigFont[];
+#include <Metro.h>
+#include <Bounce.h>
+#include <SdFat.h>
+#include <ADC.h>
 
-//Timer
-Metro screenOff;
-boolean screenPressed;
-byte screenOffTime;
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
-//Button Debouncer
-Bounce buttonDebouncer(pin_button, 100);
-Bounce touchDebouncer(pin_touch_irq, 100);
+extern unsigned short* bigBuffer;
+extern unsigned short* smallBuffer;
+extern Metro screenOff;
+extern boolean screenPressed;
+extern byte screenOffTime;
+extern Bounce buttonDebouncer;
+extern Bounce touchDebouncer;
+extern SdFat sd;
+extern SdFile sdFile;
+extern String sdInfo;
+extern char saveFilename[20];
+extern ADC *batMeasure;
+extern int8_t batPercentage;
+extern long batTimer;
+extern int8_t batComp;
+extern bool convertEnabled;
+extern bool visualEnabled;
+extern bool autoMode;
+extern bool limitsLocked;
+extern bool rotationVert;
+extern bool rotationHorizont;
+extern bool batteryEnabled;
+extern bool timeEnabled;
+extern bool dateEnabled;
+extern bool spotEnabled;
+extern bool colorbarEnabled;
+extern bool storageEnabled;
+extern byte filterType;
+extern byte minMaxPoints;
+extern bool tempFormat;
+extern byte textColor;
+extern bool laserEnabled;
+extern byte displayMode;
+extern bool hqRes;
+extern byte leptonVersion;
+extern byte leptonShutter;
+extern boolean mlx90614Version;
+extern byte teensyVersion;
+extern byte diagnostic;
+extern byte colorScheme;
+extern const byte *colorMap;
+extern int16_t colorElements;
+extern float calOffset;
+extern float calSlope;
+extern byte calStatus;
+extern float calComp;
+extern long calTimer;
+extern uint16_t maxValue;
+extern uint16_t minValue;
+extern float spotTemp;
+extern float ambTemp;
+extern uint16_t minTempPos;
+extern uint16_t minTempVal;
+extern uint16_t maxTempPos;
+extern uint16_t maxTempVal;
+extern byte hotColdMode;
+extern int16_t hotColdLevel;
+extern byte hotColdColor;
+extern uint16_t tempPoints[96][2];
+extern float adjCombAlpha;
+extern float adjCombFactor;
+extern byte adjCombLeft;
+extern byte adjCombRight;
+extern byte adjCombUp;
+extern byte adjCombDown;
+extern volatile byte imgSave;
+extern volatile byte videoSave;
+extern volatile byte showMenu;
+extern volatile bool longTouch;
+extern volatile bool serialMode;
+extern volatile byte loadTouch;
 
-//SD
-SdFat sd;
-SdFile sdFile;
-String sdInfo;
-
-//Save filename 
-char saveFilename[20];
-
-//Battery ADC
-ADC *batMeasure;
-//Battery
-int8_t batPercentage;
-long batTimer;
-int8_t batComp;
-
-//Convert RAW to BMP
-bool convertEnabled;
-//Save visual image
-bool visualEnabled;
-//Automatic mode
-bool autoMode;
-//Lock current limits
-bool limitsLocked;
-//Vertical display rotation
-bool rotationVert;
-bool rotationHorizont;
-
-//Display options
-bool batteryEnabled;
-bool timeEnabled;
-bool dateEnabled;
-bool spotEnabled;
-bool colorbarEnabled;
-bool storageEnabled;
-byte filterType;
-byte minMaxPoints;
-
-//Temperature format
-bool tempFormat;
-
-//Text color
-byte textColor;
-
-//Laser state
-bool laserEnabled;
-
-//Display mode
-byte displayMode;
-
-//Resolution, V2 only
-bool hqRes;
-
-//FLIR Lepton sensor version
-byte leptonVersion;
-//FLIR Lepton Shutter mode
-byte leptonShutter;
-
-//MLX90614 sensor version
-boolean mlx90614Version;
-
-//Teensy version
-byte teensyVersion;
-
-//HW diagnostic information
-byte diagnostic = diag_ok;
-
-//Current color scheme - standard is rainbow
-byte colorScheme;
-//Pointer to the current color scheme
-const byte *colorMap;
-//Number of rgb elements inside the color scheme
-int16_t colorElements;
-
-//Calibration offset
-float calOffset;
-//Calibration slope
-float calSlope;
-//Calibration status
-byte calStatus;
-//Calibration compensation
-float calComp;
-//Calibration warmup timer
-long calTimer;
-
-//Min & max lepton raw values
-uint16_t maxValue;
-uint16_t minValue;
-
-//Spot & ambient temperature
-float spotTemp;
-float ambTemp;
-
-//Position of min and maxtemp
-uint16_t minTempPos;
-uint16_t minTempVal;
-uint16_t maxTempPos;
-uint16_t maxTempVal;
-
-//Hot / Cold mode
-byte hotColdMode;
-int16_t hotColdLevel;
-byte hotColdColor;
-
-//Array to store the tempPoints
-uint16_t tempPoints[96][2];
-
-//Adjust combined image
-float adjCombAlpha;
-float adjCombFactor;
-byte adjCombLeft;
-byte adjCombRight;
-byte adjCombUp;
-byte adjCombDown;
-
-//Save Image in the next cycle
-volatile byte imgSave;
-//Save Video in the next cycle
-volatile byte videoSave;
-//Show Live Mode Menu in the next cycle
-volatile byte showMenu;
-//Handler for a long touch press
-volatile bool longTouch;
-//Check if in serial mode
-volatile bool serialMode;
-//Load touch decision marker
-volatile byte loadTouch;
+#endif /* GLOBALVARIABLES_H */

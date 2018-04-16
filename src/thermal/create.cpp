@@ -13,10 +13,25 @@
 *
 */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <displaydefines.h>
+#include <display.h>
+#include <calibration.h>
+#include <point.h>
+#include <touchscreen.h>
+#include <gui.h>
+#include <fonts.h>
+#include <hardware.h>
+#include <camera.h>
+#include <lepton.h>
+#include <save.h>
 #include <create.h>
 
-/* Methods*/
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Filter a 160x120 smallBuffer with 3x3 gaussian kernel */
 void gaussianFilter() {
@@ -411,11 +426,11 @@ redraw:
 	//Set text color, font and background
 	changeTextColor();
 	display_setBackColor(VGA_TRANSPARENT);
-	display_setFont(smallFont);
+	display_setFont((uint8_t*) smallFont);
 	//Show current temperature points
 	showTemperatures();
 	//Display title
-	display_setFont(bigFont);
+	display_setFont((uint8_t*) bigFont);
 	display_print((char*) "Select position", CENTER, 210);
 
 	//Get touched coordinates

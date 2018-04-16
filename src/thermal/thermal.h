@@ -16,23 +16,17 @@
 #ifndef _THERMAL_H
 #define _THERMAL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*########################## PUBLIC PROCEDURES ################################*/
 
-void touchIRQ();
 void buttonIRQ();
-void longTouchHandler();
-void showColorBar();
-void changeDisplayOptions(byte* pos);
-void selectColorScheme();
 void changeColorScheme(byte* pos);
-void showImage();
+void changeDisplayOptions(byte* pos);
 void liveModeInit();
 void liveMode();
-
-#ifdef __cplusplus
-}
-#endif
+void longTouchHandler();
+void selectColorScheme();
+void showColorBar();
+void showImage();
+void touchIRQ();
 
 #endif /* _THERMAL_H */

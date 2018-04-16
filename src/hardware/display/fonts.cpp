@@ -13,8 +13,12 @@
 *
 */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
 #include <fonts.h>
+
+/*############################# PUBLIC VARIABLES ##############################*/
 
 /* Tiny Font */
 const unsigned char tinyFont[] =

@@ -13,10 +13,32 @@
  *
  */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <mlx90614.h>
+#include <lepton.h>
+#include <hardware.h>
+#include <connection.h>
+#include <mainmenu.h>
+#include <displaydefines.h>
+#include <display.h>
+#include <touchscreen.h>
+#include <buttons.h>
+#include <gui.h>
+#include <fonts.h>
 #include <calibration.h>
 
-/* Methods*/
+/*###################### PRIVATE FUNCTION BODIES ##############################*/
+
+/* Help function for least suqare fit */
+inline static double sqr(double x) {
+	return x*x;
+}
+
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Converts a given Temperature in Celcius to Fahrenheit */
 float celciusToFahrenheit(float Tc) {
@@ -135,11 +157,6 @@ void checkWarmup() {
 			limitsLocked = false;
 		}
 	}
-}
-
-/* Help function for least suqare fit */
-inline static double sqr(double x) {
-	return x*x;
 }
 
 /* Least square fit */
@@ -326,7 +343,7 @@ void calibrationProcess(bool serial, bool firstStart) {
 	}
 
 	//Restore old font
-	display_setFont(smallFont);
+	display_setFont((uint8_t*) smallFont);
 }
 
 /* Calibration */

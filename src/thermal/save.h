@@ -16,24 +16,18 @@
 #ifndef _SAVE_H
 #define _SAVE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*########################## PUBLIC PROCEDURES ################################*/
 
-void createSDName(char* filename, boolean folder);
 void createBMPFile(char* filename);
 void createJPEGFile(char* dirname);
+void createSDName(char* filename, boolean folder = false);
 void createVideoFolder(char* dirname);
-void imgSaveStart();
 void frameFilename(char* filename, uint16_t count);
-void saveVideoFrame(char* filename, char* dirname);
-void processVideoFrames(int framesCaptured, char* dirname);
-void saveRawData(bool isImage, char* name, uint16_t framesCaptured);
 void imgSaveEnd();
+void imgSaveStart();
+void processVideoFrames(int framesCaptured, char* dirname);
 void saveBuffer(char* filename);
-
-#ifdef __cplusplus
-}
-#endif
+void saveRawData(bool isImage, char* name, uint16_t framesCaptured = 0);
+void saveVideoFrame(char* filename, char* dirname);
 
 #endif /* _SAVE_H */

@@ -13,13 +13,19 @@
  *
  */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
 #include <ov2640regs.h>
+
+/*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 
 struct sensor_reg {
 	uint16_t reg;
 	uint16_t val;
 };
+
+/*############################# PUBLIC VARIABLES ##############################*/
 
 //EXIF header for 180 degree rotation
 const uint8_t exifHeader_rotated[] =

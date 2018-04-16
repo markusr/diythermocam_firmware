@@ -13,10 +13,12 @@
 *
 */
 
+/*################################# INCLUDES ##################################*/
+
 #include <Arduino.h>
 #include <vc0706.h>
 
-/* Variables */
+/*######################### STATIC DATA DECLARATIONS ##########################*/
 
 static uint8_t  serialNum = 0;
 static uint8_t  camerabuff[101];
@@ -32,7 +34,7 @@ static const uint8_t exifHeader_mirror[] =
 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x48, 0x00, 0x00,
 0x00, 0x01, 0x00, 0x00, 0x00, 0x48, 0x00, 0x00, 0x00, 0x01 };
 
-/* Methods */
+/*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Send a specific command */
 void vc0706_sendCommand(uint8_t cmd, uint8_t args[] = 0, uint8_t argn = 0) {

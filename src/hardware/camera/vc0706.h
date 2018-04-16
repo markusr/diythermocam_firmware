@@ -20,10 +20,13 @@
 extern "C" {
 #endif
 
-/* Defines*/
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
 #define VC0706_640x480 0x00
 #define VC0706_320x240 0x11
 #define VC0706_160x120 0x22
+
+/*########################## PUBLIC PROCEDURES ################################*/
 
 uint8_t vc0706_available(void);
 void vc0706_begin(void);

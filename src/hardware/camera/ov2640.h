@@ -20,6 +20,8 @@
 extern "C" {
 #endif
 
+/*########################## PUBLIC PROCEDURES ################################*/
+
 uint8_t ov2640_busRead(int address);
 void ov2640_busWrite(int address, int value);
 void ov2640_capture(void);

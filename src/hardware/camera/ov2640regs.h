@@ -20,6 +20,8 @@
 extern "C" {
 #endif
 
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
 extern const uint8_t exifHeader_rotated[];
 extern const struct sensor_reg OV2640_QVGA[] PROGMEM;
 extern const struct sensor_reg OV2640_JPEG_INIT[] PROGMEM;

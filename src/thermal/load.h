@@ -16,38 +16,33 @@
 #ifndef _LOAD_H
 #define _LOAD_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*########################## PUBLIC PROCEDURES ################################*/
 
-void clearData();
-void displayRawData();
-void loadBMPImage(char* filename);
-bool isImage(char* filename);
-void readTempPoints();
-void loadRawData(char* filename, char* dirname);
-bool yearChoose(char* filename);
-bool monthChoose(bool* months, char* filename);
-bool dayChoose(bool* days, char* filename);
-bool hourChoose(bool* hours, char* filename) ;
-bool minuteChoose(bool* minutes, char* filename);
-bool secondChoose(bool* seconds, char* filename);
-void copyIntoBuffers(char* filename);
-bool checkFileValidity();
-void checkFileStructure(bool* check);
 void checkFileEnding(bool* check, char* filename);
-bool findFile(char* filename, bool next, bool restart, int* position = 0, char* compare = NULL);
-void searchFiles();
+void checkFileStructure(bool* check);
+bool checkFileValidity();
 void chooseFile(char* filename);
-bool loadDelete(char* filename, int* pos);
-void loadFind(char* filename, int* pos);
+void clearData();
+void copyIntoBuffers(char* filename);
+bool dayChoose(bool* days, char* filename);
+void displayRawData();
+bool findFile(char* filename, bool next, bool restart, int* position = 0, char* compare = NULL);
+bool hourChoose(bool* hours, char* filename);
+bool isImage(char* filename);
 void loadAlloc();
-void loadSettings();
+void loadBMPImage(char* filename);
 void loadDeAlloc();
+bool loadDelete(char* filename, int* pos);
+void loadFiles();
+void loadFind(char* filename, int* pos);
+void loadRawData(char* filename, char* dirname = NULL);
+void loadSettings();
 void loadTouchIRQ();
-
-#ifdef __cplusplus
-}
-#endif
+bool minuteChoose(bool* minutes, char* filename);
+bool monthChoose(bool* months, char* filename);
+void readTempPoints();
+void searchFiles();
+bool secondChoose(bool* seconds, char* filename);
+bool yearChoose(char* filename);
 
 #endif /* _LOAD_H */
