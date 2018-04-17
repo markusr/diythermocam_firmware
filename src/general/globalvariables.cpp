@@ -36,8 +36,8 @@ boolean screenPressed;
 byte screenOffTime;
 
 //Button Debouncer
-Bounce buttonDebouncer(pin_button, 100);
-Bounce touchDebouncer(pin_touch_irq, 100);
+Bounce buttonDebouncer(pin_button, 200);
+Bounce touchDebouncer(pin_touch_irq, 200);
 
 //SD
 SdFat sd;
