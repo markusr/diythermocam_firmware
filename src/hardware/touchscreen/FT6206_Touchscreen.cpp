@@ -1,4 +1,26 @@
-#include "FT6206_Touchscreen.h"
+/*
+ *
+ * FT6206 Touch controller
+ *
+ * DIY-Thermocam Firmware
+ *
+ * GNU General Public License v3.0
+ *
+ * Copyright by Max Ritter
+ *
+ * http://www.diy-thermocam.net
+ * https://github.com/maxritter/DIY-Thermocam
+ *
+ */
+
+/*################################# INCLUDES ##################################*/
+
+#include <Arduino.h>
+#include <touchscreen.h>
+#include <i2c_t3.h>
+#include <FT6206_Touchscreen.h>
+
+/*###################### PRIVATE FUNCTION BODIES ##############################*/
 
 boolean FT6206_Touchscreen::begin(uint8_t threshhold) {
 	writeRegister8(FT6206_REG_THRESHHOLD, threshhold);

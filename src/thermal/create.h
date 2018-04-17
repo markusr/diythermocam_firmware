@@ -13,8 +13,8 @@
 *
 */
 
-#ifndef _CREATE_H
-#define _CREATE_H
+#ifndef CREATE_H
+#define CREATE_H
 
 /*########################## PUBLIC PROCEDURES ################################*/
 
@@ -38,4 +38,4 @@ void showTemperatures();
 void smallToBigBuffer(bool trans = false);
 void tempPointFunction(bool remove = false);
 
-#endif /* _CREATE_H */
+#endif /* CREATE_H */

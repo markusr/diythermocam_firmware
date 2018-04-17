@@ -16,10 +16,6 @@
 #ifndef COLORSCHEMES_H
 #define COLORSCHEMES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 extern const byte colorMap_arctic[];
@@ -41,9 +37,5 @@ extern const byte colorMap_wheel2[];
 extern const byte colorMap_wheel3[];
 extern const byte colorMap_whiteHot[];
 extern const byte colorMap_yellow[];
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* COLORSCHEMES_H */

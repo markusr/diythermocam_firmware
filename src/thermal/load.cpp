@@ -26,7 +26,6 @@
 #include <gui.h>
 #include <loadmenu.h>
 #include <mainmenu.h>
-#include <point.h>
 #include <touchscreen.h>
 #include <buttons.h>
 #include <fonts.h>

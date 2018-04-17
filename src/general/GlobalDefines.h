@@ -23,8 +23,8 @@ extern "C" {
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 //Current firmware version
-#define Version 	"Firmware 2.45 from 06.04.2018"
-#define fwVersion 	245
+#define Version 	"Firmware 2.46 from 17.04.2018"
+#define fwVersion 	246
 
 //Pins
 #define pin_button        2

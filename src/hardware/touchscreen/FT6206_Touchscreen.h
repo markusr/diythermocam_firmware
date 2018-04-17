@@ -1,5 +1,22 @@
-#ifndef FT6206_TOUCHSCREEN
-#define FT6206_TOUCHSCREEN
+/*
+ *
+ * FT6206 Touch controller
+ *
+ * DIY-Thermocam Firmware
+ *
+ * GNU General Public License v3.0
+ *
+ * Copyright by Max Ritter
+ *
+ * http://www.diy-thermocam.net
+ * https://github.com/maxritter/DIY-Thermocam
+ *
+ */
+
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
+#ifndef FT6206_TOUCHSCREEN_H
+#define FT6206_TOUCHSCREEN_H
 
 #define FT6206_ADDR           0x38
 #define FT6206_G_FT5201ID     0xA8
@@ -19,9 +36,7 @@
 
 #define FT6206_DEFAULT_THRESSHOLD 128
 
-#include <Arduino.h>
-#include <i2c_t3.h>
-#include <Point.h>
+/*########################## PUBLIC PROCEDURES ################################*/
 
 class FT6206_Touchscreen {
 public:
@@ -37,4 +52,4 @@ private:
 	uint16_t touchX[2], touchY[2], touchID[2];
 };
 
-#endif 
+#endif /* FT6206_TOUCHSCREEN_H */

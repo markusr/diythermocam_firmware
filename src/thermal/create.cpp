@@ -20,7 +20,6 @@
 #include <globalvariables.h>
 #include <display.h>
 #include <calibration.h>
-#include <point.h>
 #include <touchscreen.h>
 #include <gui.h>
 #include <fonts.h>
@@ -552,7 +551,9 @@ void getHotColdColors(byte* red, byte* green, byte* blue) {
 
 /* Convert the lepton values to RGB colors */
 void convertColors(bool small) {
-	uint8_t red, green, blue;
+	uint8_t red = 0;
+	uint8_t green = 0;
+	uint8_t blue = 0;
 	uint16_t value;
 
 	//Calculate the scale

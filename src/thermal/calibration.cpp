@@ -47,7 +47,7 @@ float celciusToFahrenheit(float Tc) {
 
 /* Converts a given temperature in Fahrenheit to Celcius */
 float fahrenheitToCelcius(float Tf) {
-	float Tc = (Tf - 32.0) * ((float) 9.0 / 5.0);
+	float Tc = (Tf - 32.0) * ((float) 5.0 / 9.0);
 	return Tc;
 }
 

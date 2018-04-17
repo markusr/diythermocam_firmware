@@ -16,11 +16,32 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-/*################################# INCLUDES ##################################*/
-
-#include <displaydefines.h>
-
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
+#define LEFT 0
+#define RIGHT 9999
+#define CENTER 9998
+
+#define PORTRAIT 0
+#define LANDSCAPE 1
+
+#define VGA_BLACK		0x0000
+#define VGA_WHITE		0xFFFF
+#define VGA_RED			0xF800
+#define VGA_GREEN		0x0400
+#define VGA_BLUE		0x001F
+#define VGA_SILVER		0xC618
+#define VGA_GRAY		0x8410
+#define VGA_MAROON		0x8000
+#define VGA_YELLOW		0xFE40
+#define VGA_OLIVE		0x8400
+#define VGA_LIME		0x07E0
+#define VGA_AQUA		0xBE7F
+#define VGA_TEAL		0x0410
+#define VGA_NAVY		0x0010
+#define VGA_FUCHSIA		0xF81F
+#define VGA_PURPLE		0x8010
+#define VGA_TRANSPARENT	0xFFFFFFFF
 
 struct propFont
 {

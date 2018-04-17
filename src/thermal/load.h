@@ -13,8 +13,8 @@
 *
 */
 
-#ifndef _LOAD_H
-#define _LOAD_H
+#ifndef LOAD_H
+#define LOAD_H
 
 /*########################## PUBLIC PROCEDURES ################################*/
 
@@ -45,4 +45,4 @@ void searchFiles();
 bool secondChoose(bool* seconds, char* filename);
 bool yearChoose(char* filename);
 
-#endif /* _LOAD_H */
+#endif /* LOAD_H */

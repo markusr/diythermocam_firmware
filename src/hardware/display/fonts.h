@@ -16,18 +16,10 @@
 #ifndef FONTS_H
 #define FONTS_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 extern const uint8_t tinyFont[];
 extern const uint8_t smallFont[];
 extern const uint8_t bigFont[];
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* FONTS_H */

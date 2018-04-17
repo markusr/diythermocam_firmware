@@ -23,6 +23,7 @@
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
+/* Main entry point */
 void setup()
 {
 	//Init the hardware components
@@ -54,7 +55,6 @@ void setup()
 }
 
 /* Loop not used */
-
 void loop()
 {
 }

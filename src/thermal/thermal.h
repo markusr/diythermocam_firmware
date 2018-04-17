@@ -13,8 +13,8 @@
 *
 */
 
-#ifndef _THERMAL_H
-#define _THERMAL_H
+#ifndef THERMAL_H
+#define THERMAL_H
 
 /*########################## PUBLIC PROCEDURES ################################*/
 
@@ -29,4 +29,4 @@ void showColorBar();
 void showImage();
 void touchIRQ();
 
-#endif /* _THERMAL_H */
+#endif /* THERMAL_H */

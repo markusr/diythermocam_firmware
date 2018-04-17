@@ -1,7 +1,31 @@
-#include "XPT2046_Touchscreen.h"
+/*
+ *
+ * XPT2046 Touch controller
+ *
+ * DIY-Thermocam Firmware
+ *
+ * GNU General Public License v3.0
+ *
+ * Copyright by Max Ritter
+ *
+ * http://www.diy-thermocam.net
+ * https://github.com/maxritter/DIY-Thermocam
+ *
+ */
+
+/*################################# INCLUDES ##################################*/
+
+#include <Arduino.h>
+#include <touchscreen.h>
+#include <SPI.h>
+#include <XPT2046_Touchscreen.h>
+
+/*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 
 #define Z_THRESHOLD     400
 #define MSEC_THRESHOLD  3
+
+/*###################### PRIVATE FUNCTION BODIES ##############################*/
 
 XPT2046_Touchscreen::XPT2046_Touchscreen()
 {

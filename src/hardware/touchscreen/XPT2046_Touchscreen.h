@@ -1,9 +1,22 @@
-#ifndef _XPT2046_Touchscreen_h_
-#define _XPT2046_Touchscreen_h_
+/*
+ *
+ * FT6206 Touch controller
+ *
+ * DIY-Thermocam Firmware
+ *
+ * GNU General Public License v3.0
+ *
+ * Copyright by Max Ritter
+ *
+ * http://www.diy-thermocam.net
+ * https://github.com/maxritter/DIY-Thermocam
+ *
+ */
 
-#include "Arduino.h"
-#include "../../Libraries/SPI/SPI.h"
-#include "Point.h"
+#ifndef XPT2046_TOUCHSCREEN_H
+#define XPT2046_TOUCHSCREEN_H
+
+/*########################## PUBLIC PROCEDURES ################################*/
 
 class XPT2046_Touchscreen {
 public:
@@ -23,4 +36,4 @@ private:
 	uint32_t msraw;
 };
 
-#endif
+#endif /* XPT2046_TOUCHSCREEN_H */

@@ -17,6 +17,7 @@
 
 #include <Arduino.h>
 #include <globaldefines.h>
+#include <touchscreen.h>
 #include <FT6206_Touchscreen.h>
 #include <XPT2046_Touchscreen.h>
 #include <Metro.h>
@@ -25,7 +26,6 @@
 #include <ADC.h>
 #include <globalvariables.h>
 #include <hardware.h>
-#include <Touchscreen.h>
 
 /*######################### STATIC DATA DECLARATIONS ##########################*/
 
@@ -39,7 +39,7 @@ static FT6206_Touchscreen capTouch;
 //Choose the right touch screen
 volatile bool touch_capacitive;
 
-/*######################## PUBLIC FUNCTION BODIES #############################*/
+/*###################### PRIVATE FUNCTION BODIES ##############################*/
 
 /* Returns the coordinates of the touched point */
 TS_Point touch_getPoint() {

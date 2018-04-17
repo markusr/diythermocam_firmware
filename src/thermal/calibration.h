@@ -13,8 +13,8 @@
 *
 */
 
-#ifndef _CALIBRATION_H
-#define _CALIBRATION_H
+#ifndef CALIBRATION_H
+#define CALIBRATION_H
 
 /*########################## PUBLIC PROCEDURES ################################*/
 
@@ -29,4 +29,4 @@ float fahrenheitToCelcius(float Tf);
 int linreg(int n, const uint16_t x[], const float y[], float* m, float* b, float* r);
 uint16_t tempToRaw(float temp);
 
-#endif /* _CALIBRATION_H */
+#endif /* CALIBRATION_H */
