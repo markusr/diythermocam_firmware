@@ -16,10 +16,6 @@
 #ifndef SETTINGSMENU_H
 #define SETTINGSMENU_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 void adjustCombinedGUI();
@@ -56,9 +52,5 @@ void timeMenuHandler(bool firstStart = false);
 void timeMenu(bool firstStart = false);
 void visualImageMenu(bool firstStart = false);
 void yearMenu(bool firstStart);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* SETTINGSMENU_H */

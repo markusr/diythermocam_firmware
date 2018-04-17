@@ -16,6 +16,23 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <hardware.h>
+#include <camera.h>
+#include <gui.h>
+#include <Time.h>
+#include <EEPROM.h>
+#include <thermal.h>
+#include <display.h>
+#include <lepton.h>
+#include <save.h>
+#include <touchscreen.h>
+#include <calibration.h>
+#include <hardware.h>
+#include <livemode.h>
+#include <sd.h>
+#include <create.h>
 #include <connection.h>
 
 /*######################### STATIC DATA DECLARATIONS ##########################*/
@@ -55,7 +72,7 @@ void sendRawLimits() {
 }
 
 /* Send the lepton raw data*/
-void sendRawData(bool color = false) {
+void sendRawData(bool color) {
 	uint16_t result;
 
 	//For the Lepton2.x sensor, write 4800 raw values

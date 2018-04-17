@@ -16,10 +16,6 @@
 #ifndef LIVEMODE_H
 #define LIVEMODE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 void displayBatteryStatus();
@@ -31,9 +27,5 @@ void displayTempMode();
 void displayTime();
 void displayWarmup();
 void showSpot();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* LIVEMODE_H */

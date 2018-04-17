@@ -18,7 +18,6 @@
 #include <Arduino.h>
 #include <globaldefines.h>
 #include <globalvariables.h>
-#include <displaydefines.h>
 #include <display.h>
 #include <calibration.h>
 #include <point.h>
@@ -426,11 +425,11 @@ redraw:
 	//Set text color, font and background
 	changeTextColor();
 	display_setBackColor(VGA_TRANSPARENT);
-	display_setFont((uint8_t*) smallFont);
+	display_setFont(smallFont);
 	//Show current temperature points
 	showTemperatures();
 	//Display title
-	display_setFont((uint8_t*) bigFont);
+	display_setFont(bigFont);
 	display_print((char*) "Select position", CENTER, 210);
 
 	//Get touched coordinates

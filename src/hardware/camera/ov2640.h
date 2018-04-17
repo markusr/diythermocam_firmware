@@ -16,9 +16,26 @@
 #ifndef OV2640_H
 #define OV2640_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
+#define OV2640_160x120 		0
+#define OV2640_176x144 		1
+#define OV2640_320x240 		2
+#define OV2640_352x288 		3
+#define OV2640_640x480		4
+#define OV2640_800x600 		5
+#define OV2640_1024x768		6
+#define OV2640_1280x1024	7
+#define OV2640_1600x1200	8
+
+#define CAP_DONE_MASK 0x08
+#define ARDUCHIP_TRIG 0x41
+
+struct sensor_reg
+{
+	uint16_t reg;
+	uint16_t val;
+};
 
 /*########################## PUBLIC PROCEDURES ################################*/
 
@@ -45,9 +62,5 @@ void ov2640_transfer(uint8_t * jpegData, boolean stream, uint32_t* length);
 void ov2640_writeReg(uint8_t addr, uint8_t data);
 byte ov2640_wrSensorReg8_8(int regID, int regDat);
 int ov2640_wrSensorRegs8_8(const struct sensor_reg* reglist);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* OV2640_H */

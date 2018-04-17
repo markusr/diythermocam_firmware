@@ -16,7 +16,21 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <display.h>
+#include <gui.h>
+#include <hardware.h>
+#include <mainmenu.h>
+#include <Time.h>
+#include <fonts.h>
+#include <touchscreen.h>
+#include <EEPROM.h>
+#include <battery.h>
+#include <sd.h>
+#include <create.h>
+#include <buttons.h>
+#include <settingsmenu.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -216,7 +230,7 @@ bool adjustCombinedPresetSaveMenu() {
 }
 
 /* Touch handler for the new adjust combined menu */
-void adjustCombinedNewMenuHandler(bool firstStart = false) {
+void adjustCombinedNewMenuHandler(bool firstStart) {
 	//Touch handler
 	while (true) {
 		//Touch pressed
@@ -331,7 +345,7 @@ void adjustCombinedNewMenuHandler(bool firstStart = false) {
 }
 
 /* Adjust combined new menu */
-void adjustCombinedNewMenu(bool firstStart = false) {
+void adjustCombinedNewMenu(bool firstStart) {
 	//Show loading message
 	showFullMessage((char*)"Please wait..");
 	//Prepare the preview image
@@ -757,7 +771,7 @@ void batteryGauge()
 }
 
 /* Date Menu */
-void dateMenu(bool firstStart = false) {
+void dateMenu(bool firstStart) {
 	drawTitle((char*) "Date", firstStart);
 	buttons_deleteAllButtons();
 	buttons_addButton(20, 60, 130, 70, (char*) "Day");
@@ -771,7 +785,7 @@ void dateMenu(bool firstStart = false) {
 }
 
 /* Date Menu Handler */
-void dateMenuHandler(bool firstStart = false) {
+void dateMenuHandler(bool firstStart) {
 	while (true) {
 		//touch pressed
 		if (touch_touched() == true) {
@@ -799,7 +813,7 @@ void dateMenuHandler(bool firstStart = false) {
 }
 
 /* Time Menu */
-void timeMenu(bool firstStart = false) {
+void timeMenu(bool firstStart) {
 	drawTitle((char*) "Time", firstStart);
 	buttons_deleteAllButtons();
 	buttons_addButton(20, 60, 130, 70, (char*) "Hour");
@@ -813,7 +827,7 @@ void timeMenu(bool firstStart = false) {
 }
 
 /* Time Menu Handler */
-void timeMenuHandler(bool firstStart = false) {
+void timeMenuHandler(bool firstStart) {
 	while (true) {
 		//touch pressed
 		if (touch_touched() == true) {
@@ -883,7 +897,7 @@ void otherMenuHandler() {
 
 
 /* Visual image selection menu */
-void visualImageMenu(bool firstStart = false) {
+void visualImageMenu(bool firstStart) {
 	drawTitle((char*) "Visual image", firstStart);
 	buttons_deleteAllButtons();
 	buttons_addButton(20, 60, 130, 70, (char*) "Disabled");
@@ -936,7 +950,7 @@ void visualImageMenu(bool firstStart = false) {
 }
 
 /* Convert image selection menu */
-void convertImageMenu(bool firstStart = false) {
+void convertImageMenu(bool firstStart) {
 	drawTitle((char*) "Convert image", firstStart);
 	buttons_deleteAllButtons();
 	buttons_addButton(20, 60, 130, 70, (char*) "DAT only");
@@ -1081,7 +1095,7 @@ void storageMenu() {
 }
 
 /* Temperature format menu */
-void tempFormatMenu(bool firstStart = false) {
+void tempFormatMenu(bool firstStart) {
 	drawTitle((char*) "Temp. Format", firstStart);
 	buttons_deleteAllButtons();
 	buttons_addButton(20, 60, 130, 70, (char*) "Celcius");
@@ -1133,7 +1147,7 @@ void tempFormatMenu(bool firstStart = false) {
 }
 
 /* Rotate display menu */
-void rotateDisplayMenu(bool firstStart = false) {
+void rotateDisplayMenu(bool firstStart) {
 	drawTitle((char*) "Disp. rotation", firstStart);
 	buttons_deleteAllButtons();
 	buttons_addButton(20, 60, 130, 70, (char*) "Rotation");

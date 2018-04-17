@@ -16,9 +16,10 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
 #include <SPI.h>
 #include <hardware.h>
-#include <globaldefines.h>
 #include <displaydefines.h>
 #include <EEPROM.h>
 #include <display.h>
@@ -43,7 +44,10 @@ static current_font cfont;
 static boolean transparent;
 static byte fch, fcl, bch, bcl, orient;
 static uint16_t imageX, imageY;
-static boolean display_writeToImage;
+
+/*############################# PUBLIC VARIABLES ##############################*/
+
+boolean display_writeToImage;
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -970,7 +974,7 @@ void display_rotateChar(byte c, int x, int y, int pos, int deg)
 }
 
 /* Print char array on the display */
-void display_print(char* st, int x, int y, int deg = 0)
+void display_print(char* st, int x, int y, int deg)
 {
 	int stl, i;
 
@@ -1019,7 +1023,7 @@ void display_print(char* st, int x, int y, int deg = 0)
 }
 
 /* Print a rotated string on the display */
-void display_print(String st, int x, int y, int deg = 0)
+void display_print(String st, int x, int y, int deg)
 {
 	char buf[st.length() + 1];
 	st.toCharArray(buf, st.length() + 1);
@@ -1027,7 +1031,7 @@ void display_print(String st, int x, int y, int deg = 0)
 }
 
 /* Print string on the display */
-void display_printC(String st, int x, int y, uint32_t color = VGA_BLACK)
+void display_printC(String st, int x, int y, uint32_t color)
 {
 	char buf[st.length() + 1];
 	display_setColor(color);
@@ -1036,7 +1040,7 @@ void display_printC(String st, int x, int y, uint32_t color = VGA_BLACK)
 }
 
 /* Print an integer */
-void display_printNumI(long num, int x, int y, int length = 0, char filler = ' ')
+void display_printNumI(long num, int x, int y, int length, char filler)
 {
 	char buf[25];
 	char st[27];
@@ -1096,8 +1100,7 @@ void display_convertFloat(char* buf, double num, int width, byte prec)
 }
 
 /* Print a float */
-void display_printNumF(double num, byte dec, int x, int y, char divider = '.',
-	int length = 0, char filler = ' ')
+void display_printNumF(double num, byte dec, int x, int y, char divider, int length, char filler)
 {
 	char st[27];
 	boolean neg = 0;
@@ -1134,9 +1137,9 @@ void display_printNumF(double num, byte dec, int x, int y, char divider = '.',
 }
 
 /* Set a specific font */
-void display_setFont(uint8_t* font)
+void display_setFont(const uint8_t* font)
 {
-	cfont.font = font;
+	cfont.font = (uint8_t*) font;
 	cfont.x_size = fontbyte(0);
 	cfont.y_size = fontbyte(1);
 	cfont.offset = fontbyte(2);
@@ -1162,7 +1165,7 @@ uint8_t display_getFontYsize()
 }
 
 /* Draw a bitmap on the screen */
-void display_drawBitmap(int x, int y, int sx, int sy, unsigned short* data, int scale = 1)
+void display_drawBitmap(int x, int y, int sx, int sy, unsigned short* data, int scale)
 {
 	unsigned int col;
 	int tx, ty, tsx, tsy, tc;

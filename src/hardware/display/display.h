@@ -16,6 +16,10 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+/*################################# INCLUDES ##################################*/
+
+#include <displaydefines.h>
+
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 struct propFont
@@ -28,6 +32,8 @@ struct propFont
 	int xDelta;
 	byte* dataPtr;
 };
+
+extern boolean display_writeToImage;
 
 /*########################## PUBLIC PROCEDURES ################################*/
 
@@ -68,6 +74,7 @@ void display_printNumF(double num, byte dec, int x, int y, char divider = '.', i
 void display_printNumI(long num, int x, int y, int length = 0, char filler = ' ');
 int display_printProportionalChar(byte c, int x, int y);
 void display_print(char* st, int x, int y, int deg = 0);
+void display_print(String st, int x, int y, int deg = 0);
 uint8_t display_readcommand8(uint8_t c, uint8_t index = 0);
 uint16_t display_readPixel(int16_t x, int16_t y);
 void display_readScreen(byte step, unsigned short* pcolors);
@@ -78,7 +85,7 @@ void display_setBackColor(byte r, byte g, byte b);
 void display_setBackColor(uint32_t color);
 void display_setColor(byte r, byte g, byte b);
 void display_setColor(word color);
-void display_setFont(uint8_t* font);
+void display_setFont(const uint8_t* font);
 void display_setPixel(word color);
 void display_setRotation(uint8_t m);
 void display_setXY(word x1, word y1, word x2, word y2);

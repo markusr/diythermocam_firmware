@@ -16,7 +16,23 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <SdFat.h>
+#include <sd.h>
+#include <gui.h>
+#include <EEPROM.h>
+#include <display.h>
+#include <Time.h>
+#include <touchscreen.h>
+#include <i2c_t3.h>
+#include <calibration.h>
+#include <camera.h>
+#include <battery.h>
+#include <lepton.h>
+#include <mlx90614.h>
+#include <firststart.h>
+#include <hardware.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -47,7 +63,7 @@ float bytesToFloat(uint8_t* farray)
 }
 
 /* Switch the SPI clockline to pin 14 */
-void startAltClockline(boolean sdStart = false) {
+void startAltClockline(boolean sdStart) {
 	CORE_PIN13_CONFIG = PORT_PCR_MUX(1);
 	CORE_PIN14_CONFIG = PORT_PCR_DSE | PORT_PCR_MUX(2);
 	if (sdStart)
@@ -335,7 +351,7 @@ void setDiagnostic(byte device) {
 }
 
 /* Checks for hardware issues */
-void checkDiagnostic() {
+void checkHardware() {
 	//When returning from mass storage, do not check
 	if (EEPROM.read(eeprom_massStorage) == eeprom_setValue)
 	{
@@ -635,7 +651,7 @@ void getSpotTemp() {
 }
 
 /* Switches the laser on or off*/
-void toggleLaser(bool message = false) {
+void toggleLaser(bool message) {
 	//Thermocam V4 or DIY-Thermocam V2 does not support this
 	if ((mlx90614Version == mlx90614Version_old) || (teensyVersion == teensyVersion_new))
 		return;

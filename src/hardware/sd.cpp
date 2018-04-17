@@ -16,7 +16,12 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <SdFat.h>
+#include <hardware.h>
+#include <Time.h>
+#include <sd.h>
 
 /*######################### STATIC DATA DECLARATIONS ##########################*/
 

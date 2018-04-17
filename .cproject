@@ -35,6 +35,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/hardware/camera}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/hardware/display}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/hardware/touchscreen}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/libraries/tjpgd}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.1916095847" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -56,11 +57,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/hardware/camera}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/hardware/display}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/hardware/touchscreen}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/src/libraries/tjpgd}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.409748300" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
 							<tool id="io.sloeber.tool.sketch.compiler.s.632220080" name="Arduino Assembler" superClass="io.sloeber.tool.sketch.compiler.s">
-								<option id="io.sloeber.compiler.asm.sketch.option.incpath.1487486278" name="Include Paths (-I)" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath"/>
+								<option id="io.sloeber.compiler.asm.sketch.option.incpath.1487486278" name="Include Paths (-I)" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/DIYThermocam/core/core}&quot;"/>
+								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.573563904" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>
 							<tool id="io.sloeber.tool.ar.2069699398" name="Arduino archiver" superClass="io.sloeber.tool.ar"/>
@@ -70,7 +74,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="libraries/?*/**/?xamples/**|libraries/?*/**/?xtras/**|libraries/?*/**/test*/**|libraries/?*/**/third-party/**|libraries/**/._*|libraries/?*/utility/*/*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

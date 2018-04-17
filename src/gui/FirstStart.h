@@ -16,10 +16,6 @@
 #ifndef FIRSTSTART_H
 #define FIRSTSTART_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 void calibrationHelperScreen();
@@ -37,9 +33,5 @@ void tempFormatScreen();
 void timeDateScreen();
 void visualImageScreen();
 void welcomeScreen();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* FIRSTSTART_H */

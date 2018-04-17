@@ -16,7 +16,25 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <display.h>
+#include <buttons.h>
+#include <EEPROM.h>
+#include <calibration.h>
+#include <fonts.h>
+#include <thermal.h>
+#include <hardware.h>
+#include <create.h>
+#include <settingsmenu.h>
+#include <gui.h>
+#include <load.h>
+#include <camera.h>
+#include <bitmaps.h>
+#include <lepton.h>
+#include <massstorage.h>
+#include <touchscreen.h>
+#include <mainmenu.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -139,7 +157,7 @@ bool calibrationRepeat() {
 }
 
 /* Calibration*/
-void calibrationScreen(bool firstStart = false) {
+void calibrationScreen(bool firstStart) {
 	//Normal mode
 	if (firstStart == false) {
 		mainMenuBackground();

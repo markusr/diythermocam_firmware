@@ -16,10 +16,6 @@
 #ifndef LOADMENU_H
 #define LOADMENU_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 void convertImage(char* filename);
@@ -33,9 +29,5 @@ uint16_t getVideoFrameNumber(char* dirname);
 int loadMenu(char* title, int* array, int length);
 void openImage(char* filename, int imgCount);
 void playVideo(char* dirname, int imgCount);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* LOADMENU_H */

@@ -16,6 +16,7 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <globaldefines.h>
 #include <Metro.h>
 #include <Bounce.h>
 #include <SdFat.h>

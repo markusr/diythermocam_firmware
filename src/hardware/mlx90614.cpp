@@ -16,7 +16,13 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <i2c_t3.h>
+#include <hardware.h>
+#include <EEPROM.h>
+#include <gui.h>
+#include <mlx90614.h>
 
 /*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 
@@ -106,7 +112,7 @@ void mlx90614_send(byte address, byte LSB, byte MSB) {
 }
 
 /* Receive data from the EEPROM over I2C */
-uint16_t mlx90614_receive(byte address, byte* error = NULL) {
+uint16_t mlx90614_receive(byte address, byte* error) {
 	Wire.beginTransmission(mlx90614_EEPROM);
 	Wire.write(address);
 	Wire.endTransmission(I2C_NOSTOP);

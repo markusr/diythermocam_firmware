@@ -1,22 +1,28 @@
 /*
-*
-* BATTERY - Measure the lithium battery status
-*
-* DIY-Thermocam Firmware
-*
-* GNU General Public License v3.0
-*
-* Copyright by Max Ritter
-*
-* http://www.diy-thermocam.net
-* https://github.com/maxritter/DIY-Thermocam
-*
-*/
+ *
+ * BATTERY - Measure the lithium battery status
+ *
+ * DIY-Thermocam Firmware
+ *
+ * GNU General Public License v3.0
+ *
+ * Copyright by Max Ritter
+ *
+ * http://www.diy-thermocam.net
+ * https://github.com/maxritter/DIY-Thermocam
+ *
+ */
 
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <ADC.h>
+#include <EEPROM.h>
+#include <hardware.h>
+#include <GUI.h>
+#include <battery.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -48,7 +54,7 @@ int getLipoPerc(float vol) {
 }
 
 /* Measure the battery voltage and convert it to percent */
-void checkBattery(bool start = false, bool calibrate = false) {
+void checkBattery(bool start, bool calibrate) {
 	//Read battery voltage
 	float vBat = (batMeasure->analogRead(pin_bat_measure) * 1.5 * 3.3) / batMeasure->getMaxValue(ADC_0);
 

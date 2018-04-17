@@ -22,25 +22,25 @@ extern "C" {
 
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
-extern const byte colorMap_arctic[240];
-extern const byte colorMap_blackHot[224];
-extern const byte colorMap_blueRed[192];
-extern const byte colorMap_coldest[224];
-extern const byte colorMap_contrast[224];
-extern const byte colorMap_doubleRainbow[256];
-extern const byte colorMap_grayRed[224];
-extern const byte colorMap_glowBow[224];
-extern const byte colorMap_grayscale[256];
-extern const byte colorMap_hottest[224];
-extern const byte colorMap_ironblack[256];
-extern const byte colorMap_lava[240];
-extern const byte colorMap_medical[224];
-extern const byte colorMap_rainbow[256];
-extern const byte colorMap_wheel1[256];
-extern const byte colorMap_wheel2[256];
-extern const byte colorMap_wheel3[256];
-extern const byte colorMap_whiteHot[224];
-extern const byte colorMap_yellow[224];
+extern const byte colorMap_arctic[];
+extern const byte colorMap_blackHot[];
+extern const byte colorMap_blueRed[];
+extern const byte colorMap_coldest[];
+extern const byte colorMap_contrast[];
+extern const byte colorMap_doubleRainbow[];
+extern const byte colorMap_grayRed[];
+extern const byte colorMap_glowBow[];
+extern const byte colorMap_grayscale[];
+extern const byte colorMap_hottest[];
+extern const byte colorMap_ironblack[];
+extern const byte colorMap_lava[];
+extern const byte colorMap_medical[];
+extern const byte colorMap_rainbow[];
+extern const byte colorMap_wheel1[];
+extern const byte colorMap_wheel2[];
+extern const byte colorMap_wheel3[];
+extern const byte colorMap_whiteHot[];
+extern const byte colorMap_yellow[];
 
 #ifdef __cplusplus
 }

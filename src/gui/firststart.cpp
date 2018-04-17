@@ -16,7 +16,22 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <EEPROM.h>
+#include <display.h>
+#include <fonts.h>
+#include <touchscreen.h>
+#include <colorschemes.h>
+#include <settingsmenu.h>
+#include <calibration.h>
+#include <Time.h>
+#include <mlx90614.h>
+#include <sd.h>
+#include <hardware.h>
+#include <gui.h>
+#include <connection.h>
+#include <firststart.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -62,7 +77,7 @@ void welcomeScreen() {
 }
 
 /* Shows an info screen during the first start procedure */
-void infoScreen(String* text, bool cont = true) {
+void infoScreen(String* text, bool cont) {
 	//Background & Title
 	display_fillScr(200, 200, 200);
 	display_setBackColor(200, 200, 200);

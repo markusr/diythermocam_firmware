@@ -16,10 +16,6 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 bool calibrationRepeat();
@@ -52,10 +48,6 @@ void tempLimitsPresetSaveString(int pos);
 bool tempLimitsPresets();
 void tempLimitsPresetsString(int pos);
 bool tempPointsMenu();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* MAINMENU_H */
 

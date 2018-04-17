@@ -23,7 +23,6 @@
 #include <hardware.h>
 #include <connection.h>
 #include <mainmenu.h>
-#include <displaydefines.h>
 #include <display.h>
 #include <touchscreen.h>
 #include <buttons.h>
@@ -343,7 +342,7 @@ void calibrationProcess(bool serial, bool firstStart) {
 	}
 
 	//Restore old font
-	display_setFont((uint8_t*) smallFont);
+	display_setFont(smallFont);
 }
 
 /* Calibration */

@@ -22,9 +22,9 @@ extern "C" {
 
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
-extern const unsigned char tinyFont[];
-extern const unsigned char smallFont[];
-extern const unsigned char bigFont[];
+extern const uint8_t tinyFont[];
+extern const uint8_t smallFont[];
+extern const uint8_t bigFont[];
 
 #ifdef __cplusplus
 }

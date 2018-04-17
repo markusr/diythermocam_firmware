@@ -16,7 +16,18 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <display.h>
+#include <battery.h>
+#include <Time.h>
+#include <calibration.h>
+#include <thermal.h>
+#include <gui.h>
+#include <create.h>
+#include <fonts.h>
+#include <EEPROM.h>
+#include <livemode.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -251,10 +262,10 @@ void displayInfos() {
 
 	//For Teensy 3.6, set small font
 	if ((teensyVersion == teensyVersion_new) && (hqRes))
-		display_setFont(smallFont);
+		display_setFont((uint8_t*) smallFont);
 	//For Teensy 3.1 / 3.2, set tiny font
 	else
-		display_setFont(tinyFont);
+		display_setFont((uint8_t*) tinyFont);
 
 	//Set write to image, not display
 	display_writeToImage = true;

@@ -16,7 +16,22 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <display.h>
+#include <touchscreen.h>
+#include <loadmenu.h>
+#include <save.h>
+#include <sd.h>
+#include <hardware.h>
+#include <mainmenu.h>
+#include <create.h>
+#include <gui.h>
+#include <livemode.h>
+#include <camera.h>
+#include <fonts.h>
+#include <buttons.h>
+#include <videomenu.h>
 
 /*######################### STATIC DATA DECLARATIONS ##########################*/
 

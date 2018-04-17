@@ -16,10 +16,6 @@
 #ifndef MLX90614_H
 #define MLX90614_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 boolean mlx90614_checkEmissivity();
@@ -38,9 +34,5 @@ void mlx90614_setEmissivity();
 void mlx90614_setFilter();
 void mlx90614_setMax();
 void mlx90614_setMin();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* MLX90614_H */

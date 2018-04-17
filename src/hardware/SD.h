@@ -16,10 +16,6 @@
 #ifndef SD_H
 #define SD_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 bool beginSD();
@@ -39,9 +35,5 @@ void refreshFreeSpace();
 uint32_t volSerialNumber();
 uint8_t writeCache(uint32_t lbn);
 void writeMbr();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* SD_H */

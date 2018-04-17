@@ -16,7 +16,11 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <Buttons.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <display.h>
+#include <touchscreen.h>
+#include <buttons.h>
 
 /*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 
@@ -53,8 +57,7 @@ static uint8_t* buttons_fontSymbol;
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Add a text button */
-int buttons_addButton(uint16_t x, uint16_t y, uint16_t width,
-		uint16_t height, char *label, uint16_t flags = 0, boolean largetouch = 0)
+int buttons_addButton(uint16_t x, uint16_t y, uint16_t width, uint16_t height, char *label, uint16_t flags, boolean largetouch)
 {
 	int btcnt = 0;
 
@@ -79,8 +82,7 @@ int buttons_addButton(uint16_t x, uint16_t y, uint16_t width,
 }
 
 /* Add a bitmap button */
-int buttons_addButton(uint16_t x, uint16_t y, uint16_t width,
-		uint16_t height, const uint8_t* data, const uint16_t* palette, uint16_t flags = 0)
+int buttons_addButton(uint16_t x, uint16_t y, uint16_t width, uint16_t height, const uint8_t* data, const uint16_t* palette, uint16_t flags)
 {
 	int btcnt = 0;
 
@@ -183,7 +185,7 @@ void buttons_drawButtons() {
 }
 
 /* Enable a specific button */
-void buttons_enableButton(int buttonID, boolean redraw = 0) {
+void buttons_enableButton(int buttonID, boolean redraw) {
 	if (!(buttons[buttonID].flags & BUTTON_UNUSED)) {
 		buttons[buttonID].flags = buttons[buttonID].flags & ~BUTTON_DISABLED;
 		if (redraw)
@@ -192,7 +194,7 @@ void buttons_enableButton(int buttonID, boolean redraw = 0) {
 }
 
 /* Disable a specific button */
-void buttons_disableButton(int buttonID, boolean redraw = 0) {
+void buttons_disableButton(int buttonID, boolean redraw) {
 	if (!(buttons[buttonID].flags & BUTTON_UNUSED)) {
 		buttons[buttonID].flags = buttons[buttonID].flags | BUTTON_DISABLED;
 		if (redraw)
@@ -201,7 +203,7 @@ void buttons_disableButton(int buttonID, boolean redraw = 0) {
 }
 
 /* Relabel a specific button */
-void buttons_relabelButton(int buttonID, char *label, boolean redraw = 0) {
+void buttons_relabelButton(int buttonID, char *label, boolean redraw) {
 	if (!(buttons[buttonID].flags & BUTTON_UNUSED)) {
 		buttons[buttonID].label = label;
 		if (redraw)
@@ -233,7 +235,7 @@ void buttons_deleteAllButtons() {
 }
 
 /* Check which button is pressed */
-int buttons_checkButtons(boolean timeout = 0, boolean fast = 0) {
+int buttons_checkButtons(boolean timeout, boolean fast) {
 	TS_Point p = touch_getPoint();
 	int x = p.x;
 	int y = p.y;
@@ -356,13 +358,13 @@ void buttons_setInactive(int buttonID) {
 }
 
 /* Set the text font of all buttons */
-void buttons_setTextFont(uint8_t* font) {
-	buttons_fontText = font;
+void buttons_setTextFont(const uint8_t* font) {
+	buttons_fontText = (uint8_t*) font;
 }
 
 /* Set the symbol font of all buttons */
-void buttons_setSymbolFont(uint8_t* font) {
-	buttons_fontSymbol = font;
+void buttons_setSymbolFont(const uint8_t* font) {
+	buttons_fontSymbol = (uint8_t*) font;
 }
 
 /* Set the buttons color */

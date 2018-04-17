@@ -16,10 +16,6 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 //Start & Stop command
@@ -118,9 +114,5 @@ void setTempPoints();
 void setTextColor();
 void setTime();
 bool touchHandler();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* CONNECTION_H */

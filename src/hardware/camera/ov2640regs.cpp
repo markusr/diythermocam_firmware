@@ -16,14 +16,8 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <ov2640.h>
 #include <ov2640regs.h>
-
-/*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
-
-struct sensor_reg {
-	uint16_t reg;
-	uint16_t val;
-};
 
 /*############################# PUBLIC VARIABLES ##############################*/
 
@@ -242,7 +236,7 @@ const struct sensor_reg OV2640_QVGA[] PROGMEM =
 		{ 0x5, 0x0 },
 
 
-		{ 0xff,0xff },
+		{ 0xff,0xff }
 };
 
 const struct sensor_reg OV2640_JPEG_INIT[] PROGMEM =

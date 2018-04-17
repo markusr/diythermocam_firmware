@@ -16,7 +16,14 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <display.h>
+#include <fonts.h>
+#include <bitmaps.h>
+#include <buttons.h>
+#include <hardware.h>
+#include <gui.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -48,7 +55,7 @@ void changeTextColor() {
 }
 
 /* Shows a full screen message */
-void showFullMessage(char* message, bool small = false) {
+void showFullMessage(char* message, bool small) {
 	//Fill screen complete
 	if (!small)
 		display_fillScr(200, 200, 200);
@@ -103,7 +110,7 @@ void drawMainMenuBorder()
 }
 
 /* Draw a title on the screen */
-void drawTitle(char* name, bool firstStart = false) {
+void drawTitle(char* name, bool firstStart) {
 	if (firstStart)
 		display_fillScr(200, 200, 200);
 	else {
@@ -204,7 +211,7 @@ void bootScreen() {
 	buttons_init();
 
 	//Set Fonts
-	buttons_setTextFont(smallFont);
+	buttons_setTextFont((uint8_t*) smallFont);
 	display_setFont(smallFont);
 
 	//Draw Screen

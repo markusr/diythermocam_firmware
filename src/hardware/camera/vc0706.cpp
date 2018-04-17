@@ -16,6 +16,11 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <hardware.h>
+#include <save.h>
+#include <ov2640regs.h>
 #include <vc0706.h>
 
 /*######################### STATIC DATA DECLARATIONS ##########################*/
@@ -37,13 +42,13 @@ static const uint8_t exifHeader_mirror[] =
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
 /* Send a specific command */
-void vc0706_sendCommand(uint8_t cmd, uint8_t args[] = 0, uint8_t argn = 0) {
-	Serial1.print(0x56, BYTE);
-	Serial1.print(serialNum, BYTE);
-	Serial1.print(cmd, BYTE);
+void vc0706_sendCommand(uint8_t cmd, uint8_t args[], uint8_t argn) {
+	Serial1.print(0x56, 0);
+	Serial1.print(serialNum, 0);
+	Serial1.print(cmd, 0);
 
 	for (uint8_t i = 0; i < argn; i++) {
-		Serial1.print(args[i], BYTE);
+		Serial1.print(args[i], 0);
 	}
 }
 
@@ -76,8 +81,7 @@ boolean vc0706_verifyResponse(uint8_t command) {
 }
 
 /* Run a specific command */
-boolean vc0706_runCommand(uint8_t cmd, uint8_t *args, uint8_t argn,
-	uint8_t resplen, boolean flushflag = 1) {
+boolean vc0706_runCommand(uint8_t cmd, uint8_t *args, uint8_t argn, uint8_t resplen, boolean flushflag) {
 	if (flushflag) {
 		vc0706_readResponse(100, 10);
 	}

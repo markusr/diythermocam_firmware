@@ -16,7 +16,14 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <hardware.h>
+#include <SPI.h>
+#include <i2c_t3.h>
+#include <EEPROM.h>
+#include <gui.h>
+#include <lepton.h>
 
 /*######################### STATIC DATA DECLARATIONS ##########################*/
 
@@ -65,7 +72,7 @@ void lepton_reset()
 }
 
 /* Store one package of 80 columns into RAM */
-bool savePackage(byte line, byte segment = 0) {
+bool savePackage(byte line, byte segment) {
 	//Go through the video pixels for one video line
 	for (int column = 0; column < 80; column++) {
 		//Apply horizontal mirroring
@@ -253,7 +260,7 @@ void lepton_getRawValues()
 }
 
 /* Trigger a flat-field-correction on the Lepton */
-bool lepton_ffc(bool message = false) {
+bool lepton_ffc(bool message) {
 	//Show a message for main menu
 	if (message)
 	{

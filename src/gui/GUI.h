@@ -16,10 +16,6 @@
 #ifndef GUI_H
 #define GUI_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 void bootScreen();
@@ -31,9 +27,5 @@ void floatToChar(char* buffer, float val);
 void showDiagnostic();
 void showFullMessage(char* message, bool small = false);
 void showTransMessage(char* msg);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* GUI_H */

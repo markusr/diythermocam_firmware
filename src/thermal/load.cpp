@@ -1152,7 +1152,7 @@ redraw:
 	mainMenuTitle((char*)"Load Menu");
 	//Draw the buttons
 	buttons_deleteAllButtons();
-	buttons_setTextFont((uint8_t*) bigFont);
+	buttons_setTextFont(bigFont);
 	buttons_addButton(15, 47, 140, 120, (char*) "Images");
 	buttons_addButton(165, 47, 140, 120, (char*) "Videos");
 	buttons_addButton(15, 188, 140, 40, (char*) "Back");

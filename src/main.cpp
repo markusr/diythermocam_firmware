@@ -16,6 +16,9 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <connection.h>
+#include <firststart.h>
+#include <thermal.h>
 #include <hardware.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
@@ -33,7 +36,7 @@ void setup()
 		serialInit();
 
 	//Check for hardware issues
-	checkDiagnostic();
+	checkHardware();
 
 	//Do the first start setup if required
 	if (checkFirstStart())

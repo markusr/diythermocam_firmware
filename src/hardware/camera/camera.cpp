@@ -16,8 +16,11 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <hardware.h>
+#include <save.h>
 #include <ov2640.h>
-#include <tjpgd.h>
 #include <camera.h>
 #include <vc0706.h>
 
@@ -30,6 +33,11 @@ typedef struct {
 	unsigned short joffset;
 } IODEV;
 
+/*############################# PUBLIC VARIABLES ##############################*/
+
+//The current camera resolution
+byte camera_resolution;
+
 /*######################### STATIC DATA DECLARATIONS ##########################*/
 
 //JPEG Decompressor
@@ -39,9 +47,6 @@ static IODEV camera_iodev;
 
 //Buffer to store the JPEG data
 static uint8_t* camera_jpegData;
-
-//The current camera resolution
-static byte camera_resolution;
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 
@@ -296,7 +301,7 @@ unsigned int camera_decompIn(JDEC * jd, byte* buff, unsigned int ndata) {
 }
 
 /* Transfer, decompress or save the visual image */
-void camera_get(byte mode, char* dirname = NULL)
+void camera_get(byte mode, char* dirname)
 {
 	uint32_t jpegLen;
 

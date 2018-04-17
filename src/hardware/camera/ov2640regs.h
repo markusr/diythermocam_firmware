@@ -16,10 +16,6 @@
 #ifndef OV2640_REGS_H
 #define OV2640_REGS_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 extern const uint8_t exifHeader_rotated[];
@@ -36,9 +32,5 @@ extern const struct sensor_reg OV2640_800x600_JPEG[] PROGMEM;
 extern const struct sensor_reg OV2640_1024x768_JPEG[] PROGMEM;
 extern const struct sensor_reg OV2640_1280x1024_JPEG[] PROGMEM;
 extern const struct sensor_reg OV2640_1600x1200_JPEG[] PROGMEM;
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* OV2640_REGS_H */

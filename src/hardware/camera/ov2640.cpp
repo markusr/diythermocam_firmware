@@ -16,7 +16,13 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
 #include <ov2640regs.h>
+#include <i2c_t3.h>
+#include <SPI.h>
+#include <camera.h>
+#include <hardware.h>
 #include <ov2640.h>
 
 /*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
@@ -24,22 +30,9 @@
 /* Sensor related definitions */
 
 #define SPISPEED 4000000
-
 #define BMP 0
 #define JPEG 1
-
 #define OV2640_ADDRESS 0x60
-
-#define OV2640_160x120 		0
-#define OV2640_176x144 		1
-#define OV2640_320x240 		2
-#define OV2640_352x288 		3
-#define OV2640_640x480		4
-#define OV2640_800x600 		5
-#define OV2640_1024x768		6
-#define OV2640_1280x1024	7
-#define OV2640_1600x1200	8
-
 #define OV2640_CHIPID_HIGH 0x0A
 #define OV2640_CHIPID_LOW 0x0B
 
@@ -83,10 +76,9 @@
 #define ARDUCHIP_REV 0x40
 #define VER_LOW_MASK 0x3F
 #define VER_HIGH_MASK 0xC0
-#define ARDUCHIP_TRIG 0x41
 #define VSYNC_MASK 0x01
 #define SHUTTER_MASK 0x02
-#define CAP_DONE_MASK 0x08
+
 #define FIFO_SIZE1 0x42
 #define FIFO_SIZE2 0x43
 #define FIFO_SIZE3 0x44

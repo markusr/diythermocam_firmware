@@ -16,9 +16,14 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/*################################# INCLUDES ##################################*/
+
+#include <tjpgd.h>
+
+/*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
+
+//The current camera resolution
+extern byte camera_resolution;
 
 /*########################## PUBLIC PROCEDURES ################################*/
 
@@ -32,9 +37,5 @@ void camera_init(void);
 void camera_setDisplayRes();
 void camera_setSaveRes();
 void camera_setStreamRes();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* CAMERA_H */

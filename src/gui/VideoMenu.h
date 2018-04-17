@@ -16,10 +16,6 @@
 #ifndef VIDEOMENU_H
 #define VIDEOMENU_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 void videoCaptureInterval(int16_t* remainingTime, int* framesCaptured, char* dirname);
@@ -29,9 +25,5 @@ bool videoIntervalChooser();
 bool videoIntervalHandler(byte* pos);
 void videoIntervalString(int pos);
 void videoMode();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* VIDEOMENU_H */

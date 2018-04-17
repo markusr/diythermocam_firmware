@@ -16,10 +16,6 @@
 #ifndef BITMAPS_H
 #define BITMAPS_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 extern const uint16_t icon1Colors[];
@@ -32,7 +28,11 @@ extern const uint16_t icon4Colors[];
 extern const uint8_t icon4Bitmap[];
 extern const uint16_t icon5Colors[];
 extern const uint8_t icon5Bitmap_1[];
-extern const uint8_t* icon5Bitmap_2[];
+#if defined(__MK66FX1M0__)
+extern const uint8_t icon5Bitmap_2[];
+#else
+const uint8_t* icon5Bitmap_2 = NULL;
+#endif
 extern const uint16_t icon6Colors[];
 extern const uint8_t icon6Bitmap[];
 extern const uint16_t icon7Colors[];
@@ -58,9 +58,5 @@ extern const uint16_t iconFWColors[];
 extern const uint8_t iconFWBitmap[];
 extern const uint16_t logoColors[];
 extern const uint8_t logoBitmap[];
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* BITMAPS_H */

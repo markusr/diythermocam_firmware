@@ -16,13 +16,10 @@
 #ifndef HARDWARE_H
 #define HARDWARE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*########################## PUBLIC PROCEDURES ################################*/
 
 float bytesToFloat(uint8_t* farray);
+void checkHardware();
 bool checkDiagnostic(byte device);
 void checkFWUpgrade();
 void checkNoFFC();
@@ -58,9 +55,5 @@ void storeCalibration();
 void toggleDisplay();
 void toggleLaser(bool message = false);
 boolean touchScreenPressed();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* HARDWARE_H */

@@ -16,7 +16,17 @@
 /*################################# INCLUDES ##################################*/
 
 #include <Arduino.h>
-#include <globalincludes.h>
+#include <globaldefines.h>
+#include <globalvariables.h>
+#include <display.h>
+#include <gui.h>
+#include <save.h>
+#include <fonts.h>
+#include <touchscreen.h>
+#include <hardware.h>
+#include <buttons.h>
+#include <load.h>
+#include <loadmenu.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/
 

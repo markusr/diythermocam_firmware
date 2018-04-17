@@ -16,10 +16,6 @@
 #ifndef LEPTON_H
 #define LEPTON_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*################# PUBLIC CONSTANTS, VARIABLES & DATA TYPES ##################*/
 
 //Lepton frame error return
@@ -42,9 +38,5 @@ void lepton_setReg(byte reg);
 float lepton_spotTemp();
 void lepton_version();
 bool savePackage(byte line, byte segment = 0);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* LEPTON_H */
