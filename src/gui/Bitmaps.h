@@ -31,7 +31,7 @@ extern const uint8_t icon5Bitmap_1[];
 #if defined(__MK66FX1M0__)
 extern const uint8_t icon5Bitmap_2[];
 #else
-const uint8_t* icon5Bitmap_2 = NULL;
+extern const uint8_t* icon5Bitmap_2;
 #endif
 extern const uint16_t icon6Colors[];
 extern const uint8_t icon6Bitmap[];
@@ -39,7 +39,11 @@ extern const uint16_t icon7Colors[];
 extern const uint8_t icon7Bitmap[];
 extern const uint16_t icon8Colors[];
 extern const uint8_t icon8Bitmap_1[];
+#if defined(__MK66FX1M0__)
 extern const uint8_t icon8Bitmap_2[];
+#else
+extern const uint8_t* icon8Bitmap_2;
+#endif
 extern const uint16_t icon9Colors[];
 extern const uint8_t icon9Bitmap[];
 extern const uint16_t icon10Colors[];
