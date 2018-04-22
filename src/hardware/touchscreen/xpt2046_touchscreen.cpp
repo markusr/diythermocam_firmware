@@ -18,7 +18,7 @@
 #include <Arduino.h>
 #include <touchscreen.h>
 #include <SPI.h>
-#include <XPT2046_Touchscreen.h>
+#include <xpt2046_touchscreen.h>
 
 /*################# DATA TYPES, CONSTANTS & MACRO DEFINITIONS #################*/
 

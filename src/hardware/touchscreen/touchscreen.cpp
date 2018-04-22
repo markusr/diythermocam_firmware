@@ -18,8 +18,8 @@
 #include <Arduino.h>
 #include <globaldefines.h>
 #include <touchscreen.h>
-#include <FT6206_Touchscreen.h>
-#include <XPT2046_Touchscreen.h>
+#include <ft6206_touchscreen.h>
+#include <xpt2046_touchscreen.h>
 #include <Metro.h>
 #include <Bounce.h>
 #include <SdFat.h>

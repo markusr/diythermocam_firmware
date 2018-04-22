@@ -21,7 +21,7 @@
 #include <ADC.h>
 #include <EEPROM.h>
 #include <hardware.h>
-#include <GUI.h>
+#include <gui.h>
 #include <battery.h>
 
 /*######################## PUBLIC FUNCTION BODIES #############################*/

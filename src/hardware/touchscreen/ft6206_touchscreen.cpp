@@ -18,7 +18,7 @@
 #include <Arduino.h>
 #include <touchscreen.h>
 #include <i2c_t3.h>
-#include <FT6206_Touchscreen.h>
+#include <ft6206_touchscreen.h>
 
 /*###################### PRIVATE FUNCTION BODIES ##############################*/
 
