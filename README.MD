@@ -9,9 +9,11 @@ GNU General Public License v3.0, copyright by Max Ritter
 
 If you just want to flash the newest version of the firmware to your device, follow the Firmware Update Guide in the Document section and use one of the pre-compiled versions (*.hex) from **[here](https://github.com/maxritter/diythermocam_firmware/releases)**.
 
-
 ----------
 
+You can find **older firmware versions prior to 2.46** here: **[http://diy-thermocam.bplaced.net/Firmware/](http://diy-thermocam.bplaced.net/Firmware/)**
+
+----------
 
 This guide should work on **all common operating systems** (**Windows, Linux & Mac OSX**).
 
