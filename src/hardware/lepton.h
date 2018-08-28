@@ -38,5 +38,9 @@ void lepton_setReg(byte reg);
 float lepton_spotTemp();
 void lepton_version();
 bool savePackage(byte line, byte segment = 0);
+void lepton_set_sys_gain_high();
+void lepton_set_sys_gain_low();
+void lepton_set_sys_gain_auto();
+int lepton_get_sys_gain_mode();
 
 #endif /* LEPTON_H */

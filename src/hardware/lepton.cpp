@@ -464,10 +464,106 @@ void lepton_version() {
 	EEPROM.write(eeprom_leptonVersion, leptonVersion);
 }
 
+void lepton_set_sys_gain_mode(byte mode){
+	if (mode > 2){
+		return;
+	}
+	Wire.beginTransmission(0x2A);
+	// CCI/TWI Data Registers is at 0x0008
+	Wire.write(0x00);
+	Wire.write(0x08);
+	// size is 32 bits --> so we have 4 bytes
+	// Lower 16 bits go to DATA0, hiher 16 bits go to DATA1
+	Wire.write(0x00); //MSB of DATA0
+	Wire.write(mode); //LSB of DATA0
+	Wire.write(0x00); //MSB of DATA1
+	Wire.write(0x00); //LSB of DATA1
+	Wire.write(0x00);
+	Wire.endTransmission();
+
+	//Set data length to 4
+	Wire.beginTransmission(0x2A);
+	// CCI/TWI Data Length Register is at 0x0006
+	Wire.write(0x00);
+	Wire.write(0x06);
+	//Data length bytes
+	Wire.write(0x00);
+	Wire.write(0x04);
+	Wire.endTransmission();
+
+	// Execute the SYS Gain Mode Set Command, so that the module applies the values
+	Wire.beginTransmission(0x2A);
+	Wire.write(0x00);
+	Wire.write(0x04); //COMMANDID_REG
+	// 0x0200 (SDK Module ID) + 0x48 (SDK Command ID) + 0x1 (SET operation) + 0x0000 (Protection Bit) = 0x0249.
+	Wire.write(0x02); 
+	Wire.write(0x49);
+	Wire.endTransmission();
+}
+
+void lepton_set_sys_gain_high(){
+	lepton_set_sys_gain_mode(0x00);
+}
+
+void lepton_set_sys_gain_low(){
+	lepton_set_sys_gain_mode(0x01);
+}
+
+void lepton_set_sys_gain_auto(){
+	lepton_set_sys_gain_mode(0x02);
+}
+
+/*
+ * Returns the SYS Gain Mode
+ * 0: high mode (hardware default),
+ * 1: low mode,
+ * 2: auto mode
+ * The measurement range for the Lepton 3.5 is (see datasheet for details):
+ * High Gain Mode: 	-10 to +140 deg C
+ * Low Gain Mode: 	-10 to +450 deg C
+ * 
+ * Returns -1 if the gain mode could not be read
+ */
+int lepton_get_sys_gain_mode(){
+
+	byte data[4];
+	int data_length;
+
+	//SYS Gain Mode Get Command
+	Wire.beginTransmission(0x2A);
+	Wire.write(0x00);
+	Wire.write(0x04); //COMMANDID_REG
+	// 0x0200 (SDK Module ID) + 0x48 (SDK Command ID) + 0x0 (GET operation) + 0x0000 (Protection Bit) = 0x0248.
+	Wire.write(0x02);
+	Wire.write(0x48);
+	Wire.endTransmission();
+
+	// Wait for execution of the command
+	while (lepton_readReg(0x2) & 0x01);
+
+	// Read the data length (should be 4)
+	data_length = lepton_readReg(0x6);
+
+	if (data_length != 4){
+		return -1;
+	}
+
+	Wire.requestFrom(0x2A, data_length);
+	Wire.readBytes(data, data_length);
+	Wire.endTransmission();
+
+	//The enum value is the LSB of DATA0, see set_gain_mode function
+	return data[1];
+}
+
 /* Init the FLIR Lepton LWIR sensor */
 void lepton_init() {
 	//Check the Lepton HW Revision
 	lepton_version();
+
+	//For Lepton 3.5 set to low gain mode which allows to measure up to 450 deg C.
+	if (leptonVersion == leptonVersion_3_5_shutter)
+		lepton_set_sys_gain_low();
 
 	//For radiometric Lepton, set calibration to done
 	if ((leptonVersion == leptonVersion_2_5_shutter) ||(leptonVersion == leptonVersion_3_5_shutter))
