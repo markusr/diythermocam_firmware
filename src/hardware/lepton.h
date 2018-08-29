@@ -42,5 +42,6 @@ void lepton_set_sys_gain_high();
 void lepton_set_sys_gain_low();
 void lepton_set_sys_gain_auto();
 int lepton_get_sys_gain_mode();
+float lepton_get_resolution();
 
 #endif /* LEPTON_H */

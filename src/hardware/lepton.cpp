@@ -259,46 +259,6 @@ void lepton_getRawValues()
 	lepton_end();
 }
 
-/* Trigger a flat-field-correction on the Lepton */
-bool lepton_ffc(bool message) {
-	//Show a message for main menu
-	if (message)
-	{
-		//When in manual temperature mode, a FFC is not possible
-		if (!autoMode)
-		{
-			showFullMessage((char*) "No FFC in manual mode", true);
-			delay(1000);
-			return false;
-		}
-		showFullMessage((char*) "Performing FFC..", true);
-	}
-
-	//Send FFC run command
-	Wire.beginTransmission(0x2A);
-	Wire.write(0x00);
-	Wire.write(0x04);
-
-	//For radiometric Lepton, send RAD FFC command
-	if ((leptonVersion == leptonVersion_2_5_shutter) || (leptonVersion == leptonVersion_3_5_shutter)){
-		Wire.write(0x4E);
-		Wire.write(0x2E);
-	}
-	//For all others, send normal FFC command
-	else {
-		Wire.write(0x02);
-		Wire.write(0x42);
-	}
-
-	//Get error byte
-	byte error = Wire.endTransmission();
-
-	//Wait some time when in main menu
-	if (message)
-		delay(2000);
-
-	return error;
-}
 
 /* Select I2C Register on the Lepton */
 void lepton_setReg(byte reg) {
@@ -319,15 +279,118 @@ int lepton_readReg(byte reg) {
 	return reading;
 }
 
-/* Get the spotmeter value on a radiometric lepton */
-float lepton_spotTemp() {
-	//Get RAD spotmeter value
+/*
+First reads the DATA Length Register (0x006)
+Then reads the acutal DATA Registers:
+DATA 0 Register, DATA 1 Register etc.
+
+If the request length is smaller that the DATA Length it returns -1
+*/
+int lepton_i2c_read_data_register(byte *data, int data_length_request){
+
+	int data_length_recv;
+	int data_read;
+	// Wait for execution of the command
+	while (lepton_readReg(0x2) & 0x01);
+
+	// Read the data length (should be 4)
+	data_length_recv = lepton_readReg(0x6);
+
+	if (data_length_recv < data_length_request){
+		return -1;
+	}
+
+	Wire.requestFrom(0x2A, data_length_request);
+	data_read = Wire.readBytes(data, data_length_request);
+	Wire.endTransmission();
+	return data_read;
+}
+
+/*
+First writes the actual DATA Registers (0x0008).
+Then writes the DATA Length Register (0x006)
+*/
+byte lepton_i2c_write_data_register(byte *data, int length){
+
+	// Wait for execution of the command
+	while (lepton_readReg(0x2) & 0x01);
+
+	Wire.beginTransmission(0x2A);
+	// CCI/TWI Data Registers is at 0x0008
+	Wire.write(0x00);
+	Wire.write(0x08);
+	for (int i = 0; i < length; i++){
+		Wire.write(data[i]);
+	}
+	Wire.endTransmission();
+
+	// CCI/TWI Data Length Register is at 0x0006
 	Wire.beginTransmission(0x2A);
 	Wire.write(0x00);
-	Wire.write(0x04);
-	Wire.write(0x4E);
-	Wire.write(0xD0);
-	byte error = Wire.endTransmission();
+	Wire.write(0x06);
+	//Data length bytes
+	Wire.write((length >> 8) & 0xFF);
+	Wire.write(length & 0xFF);
+	return Wire.endTransmission();
+}
+
+/*
+Write the command words (16-bit) via I2C
+*/
+byte lepton_i2c_execute_command(byte cmdbyte0, byte cmdbyte1){
+	// Wait for execution of the command
+	while (lepton_readReg(0x2) & 0x01);
+
+	Wire.beginTransmission(0x2A);
+	Wire.write(0x00);
+	Wire.write(0x04); //COMMANDID_REG
+	Wire.write(cmdbyte0);
+	Wire.write(cmdbyte1);
+	return Wire.endTransmission();	
+}
+
+/* Trigger a flat-field-correction on the Lepton */
+bool lepton_ffc(bool message) {
+	//Show a message for main menu
+	if (message)
+	{
+		//When in manual temperature mode, a FFC is not possible
+		if (!autoMode)
+		{
+			showFullMessage((char*) "No FFC in manual mode", true);
+			delay(1000);
+			return false;
+		}
+		showFullMessage((char*) "Performing FFC..", true);
+	}
+
+	byte error;
+
+	if ((leptonVersion == leptonVersion_2_5_shutter) || (leptonVersion == leptonVersion_3_5_shutter)){
+		// For radiometric Lepton, send RAD FFC command
+		// RAD FFC Normalization Command
+		// 0x0E00 (SDK Module ID) + 0x2C (SDK Command ID) + 0x2 (RUN operation) + 0x4000 (Protection Bit) = 0x4E2E
+		error = lepton_i2c_execute_command(0x4E, 0x2E);
+	}
+	else {
+		//For all others, send normal FFC command
+		// SYS Run FFC Normalization
+		// 0x0200 (SDK Module ID) + 0x40 (SDK Command ID) + 0x2 (RUN operation) + 0x0000 (Protection Bit) = 0x0242
+		error = lepton_i2c_execute_command(0x02, 0x42);
+	}
+
+	//Wait some time when in main menu
+	if (message)
+		delay(2000);
+
+	return error;
+}
+
+/* Get the spotmeter value on a radiometric lepton */
+float lepton_spotTemp() {
+	// RAD spotmeter value Command
+	// 0x0E00 (SDK Module ID) + 0xD0 (SDK Command ID) + 0x0 (GET operation) + 0x4000 (Protection Bit) = 0x4DE0
+	byte error = lepton_i2c_execute_command(0x4D, 0xE0);
 
 	//Lepton I2C error, set diagnostic
 	if (error != 0) {
@@ -335,13 +398,8 @@ float lepton_spotTemp() {
 		return 0;
 	}
 
-	//Transfer the new package
-	Wire.beginTransmission(0x2A);
-	while (lepton_readReg(0x2) & 0x01);
-	Wire.requestFrom(0x2A, lepton_readReg(0x6));
 	byte response[8];
-	Wire.readBytes(response, 8);
-	Wire.endTransmission();
+	lepton_i2c_read_data_register(response, 8);
 
 	//Calculate spot temperature in Kelvin
 	float spotTemp = (response[0] * 256.0) + response[1];
@@ -368,29 +426,11 @@ void lepton_ffcMode(bool automatic)
 	byte package[] = { automatic, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 224, 147, 4, 0, 0, 0, 0, 0, 44, 1, 52, 0 };
 
-	//Data length
-	Wire.beginTransmission(0x2A);
-	Wire.write(0x00);
-	Wire.write(0x06);
-	Wire.write(0x00);
-	Wire.write(sizeof(package));
-	Wire.endTransmission();
+	lepton_i2c_write_data_register(package, sizeof(package));
 
-	//Send package
-	Wire.beginTransmission(0x2A);
-	Wire.write(0x00);
-	Wire.write(0x08);
-	for (byte i = 0; i < sizeof(package); i++)
-		Wire.write(package[i]);
-	Wire.endTransmission();
-
-	//SYS module with FFC Mode Set
-	Wire.beginTransmission(0x2A);
-	Wire.write(0x00);
-	Wire.write(0x04);
-	Wire.write(0x02);
-	Wire.write(0x3D);
-	Wire.endTransmission();
+	// SYS FFC Mode Control Command
+	// 0x0200 (SDK Module ID) + 0x3C (SDK Command ID) + 0x1 (SET operation) + 0x0000 (Protection Bit) = 0x023D
+	lepton_i2c_execute_command(0x02, 0x3D);
 
 	//Set shutter mode
 	if (automatic)
@@ -401,13 +441,10 @@ void lepton_ffcMode(bool automatic)
 
 /* Checks the Lepton hardware revision */
 void lepton_version() {
-	//Get AGC Command
-	Wire.beginTransmission(0x2A);
-	Wire.write(0x00);
-	Wire.write(0x04);
-	Wire.write(0x48);
-	Wire.write(0x1C);
-	byte error = Wire.endTransmission();
+
+	// OEM FLIR Systems Part Number
+	// 0x0800 (SDK Module ID) + 0x1C (SDK Command ID) + 0x0 (GET operation) + 0x4000 (Protection Bit) = 0x481C
+	byte error = lepton_i2c_execute_command(0x48, 0x1C);
 
 	//Lepton I2C error, set diagnostic
 	if (error != 0) {
@@ -415,14 +452,9 @@ void lepton_version() {
 		leptonVersion = leptonVersion_2_0_noShutter;
 		return;
 	}
-
-	//Transfer the new package
-	Wire.beginTransmission(0x2A);
-	while (lepton_readReg(0x2) & 0x01);
-	Wire.requestFrom(0x2A, lepton_readReg(0x6));
+	
 	char leptonhw[33];
-	Wire.readBytes(leptonhw, 32);
-	Wire.endTransmission();
+	lepton_i2c_read_data_register((byte*)leptonhw, 32);
 
 	//Detected Lepton2 Non-Shuttered
 	if (strstr(leptonhw, "05-060340") != NULL) {
@@ -468,37 +500,14 @@ void lepton_set_sys_gain_mode(byte mode){
 	if (mode > 2){
 		return;
 	}
-	Wire.beginTransmission(0x2A);
-	// CCI/TWI Data Registers is at 0x0008
-	Wire.write(0x00);
-	Wire.write(0x08);
-	// size is 32 bits --> so we have 4 bytes
-	// Lower 16 bits go to DATA0, hiher 16 bits go to DATA1
-	Wire.write(0x00); //MSB of DATA0
-	Wire.write(mode); //LSB of DATA0
-	Wire.write(0x00); //MSB of DATA1
-	Wire.write(0x00); //LSB of DATA1
-	Wire.write(0x00);
-	Wire.endTransmission();
 
-	//Set data length to 4
-	Wire.beginTransmission(0x2A);
-	// CCI/TWI Data Length Register is at 0x0006
-	Wire.write(0x00);
-	Wire.write(0x06);
-	//Data length bytes
-	Wire.write(0x00);
-	Wire.write(0x04);
-	Wire.endTransmission();
+	//The enum value is the LSB of DATA0
+	byte data[4] = {0x00, mode, 0x00, 0x00};
+	lepton_i2c_write_data_register(data, 4);
 
 	// Execute the SYS Gain Mode Set Command, so that the module applies the values
-	Wire.beginTransmission(0x2A);
-	Wire.write(0x00);
-	Wire.write(0x04); //COMMANDID_REG
 	// 0x0200 (SDK Module ID) + 0x48 (SDK Command ID) + 0x1 (SET operation) + 0x0000 (Protection Bit) = 0x0249.
-	Wire.write(0x02); 
-	Wire.write(0x49);
-	Wire.endTransmission();
+	lepton_i2c_execute_command(0x02, 0x49);
 }
 
 void lepton_set_sys_gain_high(){
@@ -527,47 +536,90 @@ void lepton_set_sys_gain_auto(){
 int lepton_get_sys_gain_mode(){
 
 	byte data[4];
-	int data_length;
 
 	//SYS Gain Mode Get Command
-	Wire.beginTransmission(0x2A);
-	Wire.write(0x00);
-	Wire.write(0x04); //COMMANDID_REG
 	// 0x0200 (SDK Module ID) + 0x48 (SDK Command ID) + 0x0 (GET operation) + 0x0000 (Protection Bit) = 0x0248.
-	Wire.write(0x02);
-	Wire.write(0x48);
-	Wire.endTransmission();
+	lepton_i2c_execute_command(0x02, 0x48);
+	lepton_i2c_read_data_register(data, 4);
 
-	// Wait for execution of the command
-	while (lepton_readReg(0x2) & 0x01);
-
-	// Read the data length (should be 4)
-	data_length = lepton_readReg(0x6);
-
-	if (data_length != 4){
-		return -1;
-	}
-
-	Wire.requestFrom(0x2A, data_length);
-	Wire.readBytes(data, data_length);
-	Wire.endTransmission();
-
-	//The enum value is the LSB of DATA0, see set_gain_mode function
+	//The enum value is the LSB of DATA0
 	return data[1];
 }
+
+/*
+ * Returns the  RAD T-Linear Resolution
+ * 0: 100
+ * 1: 10
+ */
+byte lepton_get_rad_tlinear_resolution(){
+
+	byte data[4];
+
+	// RAD T-Linear Resolution Get Command
+	// 0x0E00 (SDK Module ID) + 0xC4 (SDK Command ID) + 0x0 (GET operation) + 0x4000 (Protection Bit) = 0x4EC4.
+	lepton_i2c_execute_command(0x4E, 0xC4);
+	lepton_i2c_read_data_register(data, 4);
+
+	//The enum value is the LSB of DATA0
+	return data[1];
+}
+
+/*
+ * Returns the RAD T-Linear Resolution Factor as a float
+ * Returns -1 if the value could not be read
+ */
+float lepton_get_resolution(){
+	byte resolution = lepton_get_rad_tlinear_resolution();
+	if (resolution == 0){
+		return 0.1;
+	}
+	else{
+		return 0.01;
+	}
+}
+
+void lepton_set_rad_tlinear_resolution(byte resolution){
+	if (resolution > 1){
+		return;
+	}
+
+	//The enum value is the LSB of DATA0
+	byte data[4] = {0x00, resolution, 0x00, 0x00};
+	lepton_i2c_write_data_register(data, 4);
+
+	// RAD T-Linear Resolution Set Command
+	// 0x0E00 (SDK Module ID) + 0xC4 (SDK Command ID) + 0x1 (SET operation) + 0x4000 (Protection Bit) = 0x4EC5.
+	lepton_i2c_execute_command(0x4E, 0xC5);
+}
+
+void lepton_set_rad_tlinear_10(){
+	lepton_set_rad_tlinear_resolution(0);
+}
+
+void lepton_set_rad_tlinear_100(){
+	lepton_set_rad_tlinear_resolution(1);
+}
+
+
 
 /* Init the FLIR Lepton LWIR sensor */
 void lepton_init() {
 	//Check the Lepton HW Revision
 	lepton_version();
 
-	//For Lepton 3.5 set to low gain mode which allows to measure up to 450 deg C.
-	if (leptonVersion == leptonVersion_3_5_shutter)
-		lepton_set_sys_gain_low();
-
 	//For radiometric Lepton, set calibration to done
 	if ((leptonVersion == leptonVersion_2_5_shutter) ||(leptonVersion == leptonVersion_3_5_shutter))
 		calStatus = cal_standard;
+
+	//For Lepton 3.5 set to low gain mode which allows to measure up to 450 deg C.
+	if (leptonVersion == leptonVersion_3_5_shutter){
+		lepton_set_sys_gain_low();
+		lepton_set_rad_tlinear_10();
+		calOffset = -273.15;
+		calSlope = 0.1;
+		calStatus = cal_standard;
+	}
+		
 
 	//Otherwise init warmup timer
 	else {
