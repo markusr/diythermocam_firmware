@@ -312,8 +312,9 @@ void readEEPROM() {
 	}
 	//Calibration slope
 	read = EEPROM.read(eeprom_calSlopeSet);
-	if ((leptonVersion == leptonVersion_2_5_shutter) || (leptonVersion == leptonVersion_3_5_shutter))
-		calSlope = 0.01;
+	if ((leptonVersion == leptonVersion_2_5_shutter) || (leptonVersion == leptonVersion_3_5_shutter)){
+		calSlope = lepton_get_resolution();
+	}
 	else if (read == eeprom_setValue)
 		readCalibration();
 	else
