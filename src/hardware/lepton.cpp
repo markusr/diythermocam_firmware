@@ -496,6 +496,16 @@ void lepton_version() {
 	EEPROM.write(eeprom_leptonVersion, leptonVersion);
 }
 
+/*
+ * Set the SYS Gain Mode
+ * 0: high mode (hardware default),
+ * 1: low mode,
+ * 2: auto mode
+ * The measurement range for the Lepton 3.5 is (see datasheet for details):
+ * High Gain Mode: 	-10 to +140 deg C
+ * Low Gain Mode: 	-10 to +450 deg C
+ * 
+ */
 void lepton_set_sys_gain_mode(byte mode){
 	if (mode > 2){
 		return;
@@ -510,14 +520,23 @@ void lepton_set_sys_gain_mode(byte mode){
 	lepton_i2c_execute_command(0x02, 0x49);
 }
 
+/*
+ * Sets the SYS Gain Mode to high gain mode
+ */
 void lepton_set_sys_gain_high(){
 	lepton_set_sys_gain_mode(0x00);
 }
 
+/*
+ * Sets the SYS Gain Mode to low gain mode
+ */
 void lepton_set_sys_gain_low(){
 	lepton_set_sys_gain_mode(0x01);
 }
 
+/*
+ * Sets the SYS Gain Mode to auto mode
+ */
 void lepton_set_sys_gain_auto(){
 	lepton_set_sys_gain_mode(0x02);
 }
@@ -578,6 +597,16 @@ float lepton_get_resolution(){
 	}
 }
 
+/*
+ * Sets the RAD T-Linear Resolution
+ * resolution: 0 = factor 100
+ * resolution: 1 = factor 10
+ * 
+ * You need to set this to factor 10 for temperature over 382.2 deg C
+ * The maximum temperature value of the 16-bit is 65535. 
+ * For factor 100: The maximum is 655.35 Kelvin which equals to 655.35 - 273.15 = 382.2 deg C
+ * For factor 10:  The maximum is 6553.5 Kelvin which equals to 6553.5 - 273.15 = 6280.35 deg C
+ */
 void lepton_set_rad_tlinear_resolution(byte resolution){
 	if (resolution > 1){
 		return;
@@ -592,15 +621,19 @@ void lepton_set_rad_tlinear_resolution(byte resolution){
 	lepton_i2c_execute_command(0x4E, 0xC5);
 }
 
+/*
+ * Sets the RAD T-Linear Resolution to 10 (factor 0.1)
+ */
 void lepton_set_rad_tlinear_10(){
 	lepton_set_rad_tlinear_resolution(0);
 }
 
+/*
+ * Sets the RAD T-Linear Resolution to 100 (factor 0.01)
+ */
 void lepton_set_rad_tlinear_100(){
 	lepton_set_rad_tlinear_resolution(1);
 }
-
-
 
 /* Init the FLIR Lepton LWIR sensor */
 void lepton_init() {
